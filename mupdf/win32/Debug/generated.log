@@ -1,0 +1,34 @@
+﻿2013/08/05 13:19:53 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\work\mupdf\win32\generated.vcxproj" (build ターゲット)。
+     1>PrepareForBuild:
+         ディレクトリ "obj\Win32\Debug\" を作成しています。
+       Build:
+         generate.bat
+         fontdump.c
+         cmapdump.c
+         cquote.c
+     1>EXEC : warning : ignoring surrogate pair mapping in cmap Adobe-CNS1-UCS2
+     1>EXEC : warning : ... repeated 1702 times ...
+     1>EXEC : warning : range limits out of range in cmap CNS-EUC-H
+     1>EXEC : warning : ... repeated 238 times ...
+     1>EXEC : warning : range limits out of range in cmap CNS-EUC-V
+     1>EXEC : warning : ... repeated 261 times ...
+     1>EXEC : warning : range limits out of range in cmap UniCNS-UTF16-H
+     1>EXEC : warning : ... repeated 1717 times ...
+     1>EXEC : warning : ignoring surrogate pair mapping in cmap Adobe-GB1-UCS2
+     1>EXEC : warning : ... repeated 6 times ...
+     1>EXEC : warning : range limits out of range in cmap GBK2K-H
+     1>EXEC : warning : ... repeated 1017 times ...
+     1>EXEC : warning : range limits out of range in cmap UniGB-UTF16-H
+     1>EXEC : warning : ... repeated 8 times ...
+     1>EXEC : warning : ignoring surrogate pair mapping in cmap Adobe-Japan1-UCS2
+     1>EXEC : warning : ... repeated 388 times ...
+     1>EXEC : warning : range limits out of range in cmap Hojo-EUC-H
+     1>EXEC : warning : ... repeated 84 times ...
+     1>EXEC : warning : range limits out of range in cmap UniJIS-UTF16-H
+     1>EXEC : warning : ... repeated 421 times ...
+     1>プロジェクト "C:\work\mupdf\win32\generated.vcxproj" (build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:06.16

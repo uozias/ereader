@@ -1,0 +1,29 @@
+﻿2013/08/05 13:20:14 にビルドを開始しました。
+     1>ノード 3 上のプロジェクト "C:\work\mupdf\win32\mupdf.vcxproj" (build ターゲット)。
+     1>InitializeBuildStatus:
+         "AlwaysCreate" が指定されたため "Debug\mupdf\mupdf.unsuccessfulbuild" を作成しています。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\fitz /I..\pdf /I..\xps /I..\cbz /ZI /nologo /W3 /WX- /Od /Oy- /D FT2_BUILD_LIBRARY /D OPJ_STATIC /D DEBUG=1 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\mupdf\\" /Fd"Debug\mupdf\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\apps\pdfapp.c ..\apps\win_main.c
+         win_main.c
+         pdfapp.c
+         コードを生成中...
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /l"0x0409" /nologo /fo"Debug\mupdf\win_res.res" ..\apps\win_res.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Debug\mupdf.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\mupdf\mupdf.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\work\mupdf\win32\Debug\mupdf.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Debug\mupdf.lib" /MACHINE:X86 Debug\mupdf\win_res.res
+         Debug\mupdf\pdfapp.obj
+         Debug\mupdf\win_main.obj
+         C:\work\mupdf\win32\Debug\libmupdf.lib
+         "C:\work\mupdf\win32\Debug\libmupdf-nov8.lib"
+         C:\work\mupdf\win32\Debug\libthirdparty.lib
+         mupdf.vcxproj -> C:\work\mupdf\win32\Debug\mupdf.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"Debug\mupdf.exe;#1" /manifest Debug\mupdf\mupdf.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         ファイル "Debug\mupdf\mupdf.unsuccessfulbuild" を削除しています。
+         "Debug\mupdf\mupdf.lastbuildstate" のタッチ タスクを実行しています。
+     1>プロジェクト "C:\work\mupdf\win32\mupdf.vcxproj" (build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:01.43
