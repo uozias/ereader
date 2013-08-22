@@ -50,4 +50,9 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="デフォルト">
+			<resource resourceType="PROJECT" workspacePath="/sreader"/>
+		</configuration>
+	</storageModule>
 </cproject>

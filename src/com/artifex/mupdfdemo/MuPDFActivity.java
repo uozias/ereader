@@ -6,6 +6,7 @@ import java.util.concurrent.Executor;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -237,6 +237,7 @@ public class MuPDFActivity extends Activity
 	}
 
 	/** Called when the activity is first created. */
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -257,6 +258,8 @@ public class MuPDFActivity extends Activity
 			byte buffer[] = null;
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 				Uri uri = intent.getData();
+				//original code of MuPDF
+				/*
 				if (uri.toString().startsWith("content://")) {
 					// Handle view requests from the Transformer Prime's file manager
 					// Hopefully other file managers will use this same scheme, if not
@@ -302,7 +305,48 @@ public class MuPDFActivity extends Activity
 							uri = Uri.parse(str);
 						}
 					}
+
 				}
+				*/
+
+
+				//added by uozias
+				String failString = null;
+				try {
+					InputStream is = getContentResolver().openInputStream(uri);
+					int len = is.available();
+					buffer = new byte[len];
+					is.read(buffer, 0, len);
+					is.close();
+				}
+				catch (java.lang.OutOfMemoryError e)
+				{
+					System.out.println("Out of memory during buffer reading");
+					failString = e.toString();
+				}
+				catch (Exception e) {
+					failString = e.toString();
+				}
+				if (failString != null)
+				{
+					buffer = null;
+					Resources res = getResources();
+					AlertDialog alert = mAlertBuilder.create();
+					String contentFailure = res.getString(R.string.content_failure);
+					String openFailed = res.getString(R.string.open_failed);
+					setTitle(String.format(contentFailure, openFailed, failString));
+					alert.setButton(AlertDialog.BUTTON_POSITIVE, "Dismiss",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									finish();
+								}
+							});
+					alert.show();
+					return;
+				}
+				//end added by aoyagi
+
+
 				if (buffer != null) {
 					core = openBuffer(buffer);
 				} else {
@@ -465,6 +509,7 @@ public class MuPDFActivity extends Activity
 
 		final Context context = this;
 		mCopySelectButton.setOnClickListener(new View.OnClickListener() {
+			@SuppressLint("NewApi")
 			public void onClick(View v) {
 				MuPDFView pageView = (MuPDFView) mDocView.getDisplayedView();
 				boolean copied = false;
