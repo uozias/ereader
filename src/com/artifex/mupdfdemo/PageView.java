@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.example.sreader.R;
+import com.webthreeapp.sreader.R;
 
 class PatchInfo {
 	public BitmapHolder bmh;

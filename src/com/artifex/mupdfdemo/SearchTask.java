@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.RectF;
 import android.os.Handler;
 
-import com.example.sreader.R;
+import com.webthreeapp.sreader.R;
 
 class ProgressDialogX extends ProgressDialog {
 	public ProgressDialogX(Context context) {

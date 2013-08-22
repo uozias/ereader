@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.sreader.R;
+import com.webthreeapp.sreader.R;
 
 public class ChoosePDFActivity extends ListActivity {
 	static private File  mDirectory;

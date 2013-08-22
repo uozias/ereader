@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import com.example.sreader.R;
+import com.webthreeapp.sreader.R;
 
 abstract class PassClickResultVisitor {
 	public abstract void visitText(PassClickResultText result);

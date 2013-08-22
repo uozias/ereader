@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.sreader.R;
+import com.webthreeapp.sreader.R;
 
 public class OutlineAdapter extends BaseAdapter {
 	private final OutlineItem    mItems[];

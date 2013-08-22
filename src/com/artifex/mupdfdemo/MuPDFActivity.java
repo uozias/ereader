@@ -35,7 +35,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
-import com.example.sreader.R;
+import com.webthreeapp.sreader.R;
 
 class ThreadPerTaskExecutor implements Executor {
 	public void execute(Runnable r) {

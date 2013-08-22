@@ -21,4 +21,5 @@
     <string name="search">Search</string>
     <string name="copy">Copy</string>
     <string name="strike_out">Strike out</string>
+    <string name="top_text">読みたい書籍のアプリから起動して下さい。本アプリからは開けません。</string>
 </resources>
