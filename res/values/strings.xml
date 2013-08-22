@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MuPDF</string>
+    <string name="app_name">コンテンツリーダー</string>
     <string name="version">1.2</string>
     <string name="no_media_warning">Storage Media not present</string>
     <string name="no_media_hint">Sharing the storage media with a PC can make it inaccessible</string>
@@ -21,5 +21,6 @@
     <string name="search">Search</string>
     <string name="copy">Copy</string>
     <string name="strike_out">Strike out</string>
-    <string name="top_text">読みたい書籍のアプリから起動して下さい。本アプリからは開けません。</string>
+    <string name="top_text">読みたいコンテンツのアプリから起動して下さい。本アプリからコンテンツは開けません。</string>
+    <string name="ad_dummy">ここに宣伝を載せる</string>
 </resources>

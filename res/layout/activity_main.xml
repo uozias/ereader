@@ -9,8 +9,39 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/top_text" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/textView1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/adView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/ad_dummy" />
+
+        <TextView
+            android:id="@+id/adView2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/ad_dummy" />
+
+       <TextView
+            android:id="@+id/adView3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/ad_dummy" />
+
+
+    </LinearLayout>
 
 </RelativeLayout>

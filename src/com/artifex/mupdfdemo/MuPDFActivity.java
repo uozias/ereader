@@ -256,61 +256,9 @@ public class MuPDFActivity extends Activity
 		if (core == null) {
 			Intent intent = getIntent();
 			byte buffer[] = null;
-			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+			if ("com.webthreeapp.book.VIEW".equals(intent.getAction())) {
 				Uri uri = intent.getData();
-				//original code of MuPDF
-				/*
-				if (uri.toString().startsWith("content://")) {
-					// Handle view requests from the Transformer Prime's file manager
-					// Hopefully other file managers will use this same scheme, if not
-					// using explicit paths.
-					Cursor cursor = getContentResolver().query(uri, new String[]{"_data"}, null, null, null);
-					if (cursor.moveToFirst()) {
-						String str = cursor.getString(0);
-						String failString = null;
-						if (str == null) {
-							try {
-								InputStream is = getContentResolver().openInputStream(uri);
-								int len = is.available();
-								buffer = new byte[len];
-								is.read(buffer, 0, len);
-								is.close();
-							}
-							catch (java.lang.OutOfMemoryError e)
-							{
-								System.out.println("Out of memory during buffer reading");
-								failString = e.toString();
-							}
-							catch (Exception e) {
-								failString = e.toString();
-							}
-							if (failString != null)
-							{
-								buffer = null;
-								Resources res = getResources();
-								AlertDialog alert = mAlertBuilder.create();
-								String contentFailure = res.getString(R.string.content_failure);
-								String openFailed = res.getString(R.string.open_failed);
-								setTitle(String.format(contentFailure, openFailed, failString));
-								alert.setButton(AlertDialog.BUTTON_POSITIVE, "Dismiss",
-										new DialogInterface.OnClickListener() {
-											public void onClick(DialogInterface dialog, int which) {
-												finish();
-											}
-										});
-								alert.show();
-								return;
-							}
-						} else {
-							uri = Uri.parse(str);
-						}
-					}
 
-				}
-				*/
-
-
-				//added by uozias
 				String failString = null;
 				try {
 					InputStream is = getContentResolver().openInputStream(uri);
@@ -344,8 +292,6 @@ public class MuPDFActivity extends Activity
 					alert.show();
 					return;
 				}
-				//end added by aoyagi
-
 
 				if (buffer != null) {
 					core = openBuffer(buffer);
