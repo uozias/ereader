@@ -35,6 +35,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
+import com.webthreeapp.sreader.AdSpaceView;
 import com.webthreeapp.sreader.R;
 
 class ThreadPerTaskExecutor implements Executor {
@@ -625,8 +626,25 @@ public class MuPDFActivity extends Activity
 
 		// Stick the document view and the buttons overlay into a parent view
 		RelativeLayout layout = new RelativeLayout(this);
-		layout.addView(mDocView);
-		layout.addView(mButtonsView);
+
+		//added by aoyagi
+		AdSpaceView mAdSpaceViewForReader = new AdSpaceView(this);
+		mAdSpaceViewForReader.setUri("http://www.saizo-aoyagi.jp/"); //タップした時に飛ぶ先
+		mAdSpaceViewForReader.setImageResource(R.drawable.ad_dummy);//画像セット
+		mAdSpaceViewForReader.setId(R.id.ad_space_view_in_reader);//idセット
+
+		//レイアウトパラメータのセット
+		RelativeLayout.LayoutParams paramsForAdSpaceView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 100);
+		paramsForAdSpaceView.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		layout.addView(mAdSpaceViewForReader,paramsForAdSpaceView);
+
+		//added by aoyagi pdfのビュー全体を広告の分狭めるためのレイアウトパラメータ
+		RelativeLayout.LayoutParams paramsForOriginalViews = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+		paramsForOriginalViews.addRule(RelativeLayout.ABOVE, mAdSpaceViewForReader.getId());
+
+		//revised by aoyagi ビューを少し縮めている
+		layout.addView(mDocView, paramsForOriginalViews);
+		layout.addView(mButtonsView, paramsForOriginalViews);
 		layout.setBackgroundResource(R.drawable.tiled_background);
 		//layout.setBackgroundResource(R.color.canvas);
 		setContentView(layout);

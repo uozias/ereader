@@ -66,33 +66,34 @@ public final class R {
         public static final int tiled_background=0x7f020018;
     }
     public static final class id {
-        public static final int adList=0x7f090001;
-        public static final int cancel=0x7f09000b;
-        public static final int cancelSelectButton=0x7f090010;
-        public static final int copySelectButton=0x7f090012;
-        public static final int docNameText=0x7f090004;
-        public static final int icon=0x7f090019;
-        public static final int info=0x7f090016;
-        public static final int linkButton=0x7f090005;
-        public static final int lowerButtons=0x7f090013;
-        public static final int name=0x7f09001a;
-        public static final int outlineButton=0x7f090007;
-        public static final int page=0x7f090018;
-        public static final int pageNumber=0x7f090015;
-        public static final int pageSlider=0x7f090014;
-        public static final int reflowButton=0x7f090008;
-        public static final int searchBack=0x7f09000d;
-        public static final int searchButton=0x7f090009;
-        public static final int searchForward=0x7f09000e;
-        public static final int searchText=0x7f09000c;
-        public static final int selectButton=0x7f090006;
-        public static final int strikeOutButton=0x7f090011;
-        public static final int switcher=0x7f090002;
-        public static final int textView1=0x7f090000;
-        public static final int title=0x7f090017;
-        public static final int topBar=0x7f090003;
-        public static final int topBar2=0x7f09000a;
-        public static final int topBar3=0x7f09000f;
+        public static final int adList=0x7f070002;
+        public static final int ad_space_view_in_reader=0x7f070000;
+        public static final int cancel=0x7f07000c;
+        public static final int cancelSelectButton=0x7f070011;
+        public static final int copySelectButton=0x7f070013;
+        public static final int docNameText=0x7f070005;
+        public static final int icon=0x7f07001a;
+        public static final int info=0x7f070017;
+        public static final int linkButton=0x7f070006;
+        public static final int lowerButtons=0x7f070014;
+        public static final int name=0x7f07001b;
+        public static final int outlineButton=0x7f070008;
+        public static final int page=0x7f070019;
+        public static final int pageNumber=0x7f070016;
+        public static final int pageSlider=0x7f070015;
+        public static final int reflowButton=0x7f070009;
+        public static final int searchBack=0x7f07000e;
+        public static final int searchButton=0x7f07000a;
+        public static final int searchForward=0x7f07000f;
+        public static final int searchText=0x7f07000d;
+        public static final int selectButton=0x7f070007;
+        public static final int strikeOutButton=0x7f070012;
+        public static final int switcher=0x7f070003;
+        public static final int textView1=0x7f070001;
+        public static final int title=0x7f070018;
+        public static final int topBar=0x7f070004;
+        public static final int topBar2=0x7f07000b;
+        public static final int topBar3=0x7f070010;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -103,29 +104,29 @@ public final class R {
         public static final int textentry=0x7f030005;
     }
     public static final class string {
-        public static final int ad_dummy=0x7f070016;
-        public static final int app_name=0x7f070000;
-        public static final int cancel=0x7f070006;
-        public static final int content_failure=0x7f070005;
-        public static final int copy=0x7f070013;
-        public static final int enter_password=0x7f07000c;
-        public static final int link_control=0x7f07000f;
-        public static final int no_further_occurences_found=0x7f070010;
-        public static final int no_media_hint=0x7f070003;
-        public static final int no_media_warning=0x7f070002;
-        public static final int open_failed=0x7f070004;
-        public static final int outline_title=0x7f07000b;
-        public static final int picker_title=0x7f07000a;
-        public static final int search=0x7f070012;
-        public static final int search_backwards=0x7f070007;
-        public static final int search_document=0x7f070009;
-        public static final int search_forwards=0x7f070008;
-        public static final int searching_=0x7f07000e;
-        public static final int select=0x7f070011;
-        public static final int strike_out=0x7f070014;
-        public static final int text_not_found=0x7f07000d;
-        public static final int top_text=0x7f070015;
-        public static final int version=0x7f070001;
+        public static final int ad_dummy=0x7f080016;
+        public static final int app_name=0x7f080000;
+        public static final int cancel=0x7f080006;
+        public static final int content_failure=0x7f080005;
+        public static final int copy=0x7f080013;
+        public static final int enter_password=0x7f08000c;
+        public static final int link_control=0x7f08000f;
+        public static final int no_further_occurences_found=0x7f080010;
+        public static final int no_media_hint=0x7f080003;
+        public static final int no_media_warning=0x7f080002;
+        public static final int open_failed=0x7f080004;
+        public static final int outline_title=0x7f08000b;
+        public static final int picker_title=0x7f08000a;
+        public static final int search=0x7f080012;
+        public static final int search_backwards=0x7f080007;
+        public static final int search_document=0x7f080009;
+        public static final int search_forwards=0x7f080008;
+        public static final int searching_=0x7f08000e;
+        public static final int select=0x7f080011;
+        public static final int strike_out=0x7f080014;
+        public static final int text_not_found=0x7f08000d;
+        public static final int top_text=0x7f080015;
+        public static final int version=0x7f080001;
     }
     public static final class style {
         /** 
@@ -138,10 +139,10 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
     }
 }

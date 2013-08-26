@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -13,14 +12,15 @@ public class AdSpaceView extends ImageView {
 
 	private Uri uri = null;
 
-	public AdSpaceView(Context context) {
+	public  AdSpaceView(Context context) {
 		super(context);
 
-		//TODO 適切な画像をセット
+		//デフォルト画像をセット
 		this.setImageResource(R.drawable.ad_dummy);
 
 		//大きさ決める 高さを60dpで固定 トップマージン5p
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 60);
+		//親がLinearLayoutじゃない時は無視されてしまう
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 60);
 		params.setMargins(0, 10, 0, 0);
 		this.setLayoutParams(params);
 

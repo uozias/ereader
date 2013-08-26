@@ -21,11 +21,13 @@ public class MainActivity extends Activity {
 
 		//広告をレイアウトに仕込む
 		AdSpaceView adSpaceView = (AdSpaceView) new AdSpaceView(this);
-		adSpaceView.setUri("http://www.saizo-aoyagi.jp/");
+		adSpaceView.setUri("http://www.saizo-aoyagi.jp/"); //タップした時に飛ぶ先
+		adSpaceView.setImageResource(R.drawable.ad_dummy);//画像セット
 		adList.addView(adSpaceView);
 
 		AdSpaceView adSpaceView2 = (AdSpaceView) new AdSpaceView(this);
-		adSpaceView2.setUri("https://www.google.co.jp/");
+		adSpaceView2.setUri("https://www.google.co.jp/"); //タップした時に飛ぶ先
+		adSpaceView.setImageResource(R.drawable.ad_dummy); //画像セット
 		adList.addView(adSpaceView2);
 
 	}
