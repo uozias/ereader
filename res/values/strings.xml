@@ -7,9 +7,9 @@
     <string name="open_failed">Unable to open document</string>
     <string name="content_failure">%1$s: %2$s</string>
     <string name="cancel">Cancel</string>
-    <string name="search_backwards">Search backwards</string>
-    <string name="search_forwards">Search forwards</string>
-    <string name="search_document">Search document</string>
+    <string name="search_backwards">前を検索</string>
+    <string name="search_forwards">次を検索s</string>
+    <string name="search_document">検索</string>
     <string name="picker_title">%1$s %2$s: %3$s</string>
     <string name="outline_title">Table of Contents</string>
     <string name="enter_password">Enter Password</string>
@@ -18,9 +18,10 @@
     <string name="link_control">Link highlighting and enabling</string>
     <string name="no_further_occurences_found">No further occurences found</string>
     <string name="select">Select</string>
-    <string name="search">Search</string>
+    <string name="search">検索</string>
     <string name="copy">Copy</string>
     <string name="strike_out">Strike out</string>
     <string name="top_text">読みたいコンテンツのアプリから起動して下さい。本アプリからコンテンツは開けません。</string>
     <string name="ad_dummy">ここに宣伝を載せる</string>
+    <string name="share">シェアする</string>
 </resources>

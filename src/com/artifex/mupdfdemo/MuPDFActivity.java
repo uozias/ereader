@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -60,14 +61,15 @@ public class MuPDFActivity extends Activity
 	private TextView     mInfoView;
 	private ImageButton  mSearchButton;
 	private ImageButton  mReflowButton;
-	private ImageButton mSelectButton;
+	//private ImageButton mSelectButton;
 	private ImageButton mCancelSelectButton;
 	private ImageButton mCopySelectButton;
 	private ImageButton mStrikeOutButton;
 	private ImageButton  mCancelButton;
 	private ImageButton  mOutlineButton;
 	private ViewAnimator mTopBarSwitcher;
-	private ImageButton  mLinkButton;
+	//private ImageButton  mLinkButton;
+	private ImageButton mShareButton; //added by aoyagi
 	private boolean      mTopBarIsSearch;
 	private ImageButton  mSearchBack;
 	private ImageButton  mSearchFwd;
@@ -599,6 +601,16 @@ public class MuPDFActivity extends Activity
 		});
 		*/
 
+		//added by aoyagi シェア機能
+		mShareButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.d("MuPDFActivity", "share!"); //debug
+
+			}
+		});
+
 		if (core.hasOutline()) {
 			mOutlineButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
@@ -834,8 +846,8 @@ public class MuPDFActivity extends Activity
 		mInfoView = (TextView)mButtonsView.findViewById(R.id.info);
 		mSearchButton = (ImageButton)mButtonsView.findViewById(R.id.searchButton);
 		mReflowButton = (ImageButton)mButtonsView.findViewById(R.id.reflowButton);
-		mSelectButton = (ImageButton)mButtonsView.findViewById(R.id.selectButton);
-		mSelectButton.setVisibility(View.INVISIBLE); //added by aoyagi
+		//mSelectButton = (ImageButton)mButtonsView.findViewById(R.id.selectButton);
+		//mSelectButton.setVisibility(View.INVISIBLE); //added by aoyagi
 		mCancelSelectButton = (ImageButton)mButtonsView.findViewById(R.id.cancelSelectButton);
 		mCopySelectButton = (ImageButton)mButtonsView.findViewById(R.id.copySelectButton);
 		mStrikeOutButton = (ImageButton)mButtonsView.findViewById(R.id.strikeOutButton);
@@ -845,12 +857,14 @@ public class MuPDFActivity extends Activity
 		mSearchBack = (ImageButton)mButtonsView.findViewById(R.id.searchBack);
 		mSearchFwd = (ImageButton)mButtonsView.findViewById(R.id.searchForward);
 		mSearchText = (EditText)mButtonsView.findViewById(R.id.searchText);
-		mLinkButton = (ImageButton)mButtonsView.findViewById(R.id.linkButton);
-		mLinkButton.setVisibility(View.INVISIBLE); //added by aoyagi;
+		//mLinkButton = (ImageButton)mButtonsView.findViewById(R.id.linkButton);
+		//mLinkButton.setVisibility(View.INVISIBLE); //added by aoyagi;
 		mTopBarSwitcher.setVisibility(View.INVISIBLE);
 		mPageNumberView.setVisibility(View.INVISIBLE);
 		mInfoView.setVisibility(View.INVISIBLE);
 		mPageSlider.setVisibility(View.INVISIBLE);
+
+		mShareButton = (ImageButton)mButtonsView.findViewById(R.id.shareButton);
 	}
 
 	void showKeyboard() {

@@ -86,7 +86,7 @@ public final class R {
         public static final int searchButton=0x7f07000a;
         public static final int searchForward=0x7f07000f;
         public static final int searchText=0x7f07000d;
-        public static final int selectButton=0x7f070007;
+        public static final int shareButton=0x7f070007;
         public static final int strikeOutButton=0x7f070012;
         public static final int switcher=0x7f070003;
         public static final int textView1=0x7f070001;
@@ -123,6 +123,7 @@ public final class R {
         public static final int search_forwards=0x7f080008;
         public static final int searching_=0x7f08000e;
         public static final int select=0x7f080011;
+        public static final int share=0x7f080017;
         public static final int strike_out=0x7f080014;
         public static final int text_not_found=0x7f08000d;
         public static final int top_text=0x7f080015;

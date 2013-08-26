@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/toolbar" >
-
             <TextView
                 android:id="@+id/docNameText"
                 android:layout_width="wrap_content"
@@ -29,6 +28,7 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
+            <!-- disabled by aoyagi
             <ImageButton
                 android:id="@+id/linkButton"
                 android:layout_width="wrap_content"
@@ -48,6 +48,19 @@
                 android:background="@drawable/button"
                 android:contentDescription="@string/select"
                 android:src="@drawable/ic_select" />
+
+			 -->
+
+			<ImageButton
+                android:id="@+id/shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/outlineButton"
+                android:background="@drawable/button"
+                android:contentDescription="@string/share"
+                android:src="@android:drawable/ic_menu_share" />
+
 
             <ImageButton
                 android:id="@+id/outlineButton"
