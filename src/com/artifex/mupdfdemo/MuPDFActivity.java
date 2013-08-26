@@ -246,6 +246,7 @@ public class MuPDFActivity extends Activity
 
 		mAlertBuilder = new AlertDialog.Builder(this);
 
+		//new code
 		if (core == null) {
 			core = (MuPDFCore)getLastNonConfigurationInstance();
 
@@ -435,13 +436,17 @@ public class MuPDFActivity extends Activity
 			}
 		});
 
+
 		// Activate the select button
+		//disabled by aoyagi
+		/*
 		mSelectButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				mDocView.setSelectionMode(true);
 				mTopBarSwitcher.setDisplayedChild(2);
 			}
 		});
+		*/
 
 		mCancelSelectButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -574,6 +579,9 @@ public class MuPDFActivity extends Activity
 			}
 		});
 
+
+		//disabled by aoyagi
+		/*
 		mLinkButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (mLinkHighlight) {
@@ -588,6 +596,7 @@ public class MuPDFActivity extends Activity
 				mDocView.setLinksEnabled(mLinkHighlight);
 			}
 		});
+		*/
 
 		if (core.hasOutline()) {
 			mOutlineButton.setOnClickListener(new View.OnClickListener() {
@@ -808,6 +817,7 @@ public class MuPDFActivity extends Activity
 		mSearchButton = (ImageButton)mButtonsView.findViewById(R.id.searchButton);
 		mReflowButton = (ImageButton)mButtonsView.findViewById(R.id.reflowButton);
 		mSelectButton = (ImageButton)mButtonsView.findViewById(R.id.selectButton);
+		mSelectButton.setVisibility(View.INVISIBLE); //added by aoyagi
 		mCancelSelectButton = (ImageButton)mButtonsView.findViewById(R.id.cancelSelectButton);
 		mCopySelectButton = (ImageButton)mButtonsView.findViewById(R.id.copySelectButton);
 		mStrikeOutButton = (ImageButton)mButtonsView.findViewById(R.id.strikeOutButton);
@@ -818,6 +828,7 @@ public class MuPDFActivity extends Activity
 		mSearchFwd = (ImageButton)mButtonsView.findViewById(R.id.searchForward);
 		mSearchText = (EditText)mButtonsView.findViewById(R.id.searchText);
 		mLinkButton = (ImageButton)mButtonsView.findViewById(R.id.linkButton);
+		mLinkButton.setVisibility(View.INVISIBLE); //added by aoyagi;
 		mTopBarSwitcher.setVisibility(View.INVISIBLE);
 		mPageNumberView.setVisibility(View.INVISIBLE);
 		mInfoView.setVisibility(View.INVISIBLE);
