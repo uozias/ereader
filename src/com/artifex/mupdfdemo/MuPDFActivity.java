@@ -7,7 +7,6 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,10 +17,11 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -36,8 +36,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
+import com.facebook.Session;
 import com.webthreeapp.sreader.AdSpaceView;
 import com.webthreeapp.sreader.R;
+import com.webthreeapp.sreader.ShareDialogFragment;
 
 class ThreadPerTaskExecutor implements Executor {
 	public void execute(Runnable r) {
@@ -45,7 +47,7 @@ class ThreadPerTaskExecutor implements Executor {
 	}
 }
 
-public class MuPDFActivity extends Activity
+public class MuPDFActivity extends FragmentActivity
 {
 	/* The core rendering instance */
 	private MuPDFCore    core;
@@ -82,6 +84,8 @@ public class MuPDFActivity extends Activity
 	private boolean mReflow = false;
 	private AsyncTask<Void,Void,MuPDFAlert> mAlertTask;
 	private AlertDialog mAlertDialog;
+
+
 
 	public void createAlertWaiter() {
 		mAlertsActive = true;
@@ -602,14 +606,9 @@ public class MuPDFActivity extends Activity
 		*/
 
 		//added by aoyagi シェア機能
-		mShareButton.setOnClickListener(new View.OnClickListener() {
+		mShareButton.setOnClickListener(new FBOnClickListener());
 
-			@Override
-			public void onClick(View v) {
-				Log.d("MuPDFActivity", "share!"); //debug
 
-			}
-		});
 
 		if (core.hasOutline()) {
 			mOutlineButton.setOnClickListener(new View.OnClickListener() {
@@ -662,19 +661,40 @@ public class MuPDFActivity extends Activity
 		setContentView(layout);
 	}
 
+	//added by aoyagi
+	//facebookログイン用のオンクリックリスナー
+	private class FBOnClickListener implements View.OnClickListener{
+
+
+		@Override
+		public void onClick(View v) {
+			FragmentManager mFragmentManager = getSupportFragmentManager();
+			ShareDialogFragment mShareDialogFragment = new ShareDialogFragment();
+			mShareDialogFragment.show(mFragmentManager, "share_dialog");
+
+		}
+	}
+
+
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode >= 0)
 			mDocView.setDisplayedViewIndex(resultCode);
 		super.onActivityResult(requestCode, resultCode, data);
+		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data); //facebook
 	}
 
+	//revised by aoyagi
+	/*
 	public Object onRetainNonConfigurationInstance()
 	{
 		MuPDFCore mycore = core;
 		core = null;
 		return mycore;
 	}
+	*/
 
 	private void toggleReflow() {
 		mReflow = !mReflow;
@@ -952,4 +972,6 @@ public class MuPDFActivity extends Activity
 			super.onBackPressed();
 		}
 	}
+
+
 }
