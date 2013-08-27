@@ -25,6 +25,8 @@ import com.facebook.Request;
 import com.facebook.RequestAsyncTask;
 import com.facebook.Response;
 import com.facebook.Session;
+import com.facebook.Session.OpenRequest;
+import com.facebook.SessionLoginBehavior;
 import com.facebook.SessionState;
 import com.facebook.model.GraphObject;
 
@@ -168,7 +170,8 @@ public class ShareDialogFragment extends DialogFragment {
 						Session.setActiveSession(session);
 					}
 					//セッションオープンを試みる
-					session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
+					//session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
+					session.openForRead(new OpenRequest(getActivity()).setCallback(statusCallback));
 				} else {
 					//既にOPEN状態だった時は
 					Session.openActiveSession(getActivity(), fragment, true, statusCallback);
@@ -243,9 +246,10 @@ public class ShareDialogFragment extends DialogFragment {
 		//求めるパーミッションがなかったら
 		if (!isSubsetOf(PERMISSIONS, permissions)) {
 			//パーミッションをリクエスト
-			Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(this, PERMISSIONS);
+			//フラグメントじゃなくてアクティビティの方につけてみた
+			Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(getActivity(), PERMISSIONS).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
 			session.requestNewPublishPermissions(newPermissionsRequest);
-			return;
+			return; //迂回してしまう
 		}
 
 		//投稿リクエスト
@@ -286,15 +290,20 @@ public class ShareDialogFragment extends DialogFragment {
 	//ログイン状態変化のコールバック
 	private class SessionStatusCallback implements Session.StatusCallback {
 		@Override
-		public void call(Session session, SessionState state, Exception exception) {
+		public void call(Session session, SessionState sessionState, Exception exception) {
+
 
 			//ログインエラーがあったら
 			if ((exception instanceof FacebookOperationCanceledException || exception instanceof FacebookAuthorizationException)) {
 				fbLogin = false;
 				facebookButton.setChecked(false);//トグルボタンをオフに
+			}else if (sessionState == SessionState.OPENED_TOKEN_UPDATED){
+
+				//トークンアップデート(=権限の更新？)の時は、投稿を試みる
+				sendFBFeed(sendContentText.getText().toString());
 			}
 
-			SessionState sessionState = session.getState();
+
 			if (sessionState == SessionState.OPENED|| sessionState == SessionState.OPENING || sessionState == SessionState.OPENED_TOKEN_UPDATED)
 			{
 				//ログインしている時
