@@ -518,7 +518,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int adList=0x7f05000c;
         public static final int ad_space_view_in_reader=0x7f05000a;
         public static final int bold=0x7f050005;
-        public static final int button_share=0x7f05003c;
+        public static final int button_share=0x7f05003d;
         public static final int cancel=0x7f050016;
         public static final int cancelSelectButton=0x7f05001b;
         public static final int com_facebook_login_activity_progress_bar=0x7f050024;
@@ -543,8 +543,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f050035;
         public static final int copySelectButton=0x7f05001d;
         public static final int docNameText=0x7f05000f;
-        public static final int facebookButton=0x7f05003e;
-        public static final int facebookLabel=0x7f05003d;
+        public static final int facebookButton=0x7f05003f;
+        public static final int facebookLabel=0x7f05003e;
         public static final int horizontal=0x7f050003;
         public static final int icon=0x7f050039;
         public static final int info=0x7f050021;
@@ -566,7 +566,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int searchButton=0x7f050014;
         public static final int searchForward=0x7f050019;
         public static final int searchText=0x7f050017;
-        public static final int sendContentText=0x7f05003b;
+        public static final int sendContentText=0x7f05003c;
         public static final int serif=0x7f050008;
         public static final int shareButton=0x7f050011;
         public static final int small=0x7f050000;
@@ -577,9 +577,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int topBar=0x7f05000e;
         public static final int topBar2=0x7f050015;
         public static final int topBar3=0x7f05001a;
-        public static final int twitterButton=0x7f050040;
-        public static final int twitterLabel=0x7f05003f;
+        public static final int twitterButton=0x7f050041;
+        public static final int twitterLabel=0x7f050040;
         public static final int vertical=0x7f050004;
+        public static final int wrapperShareDialog=0x7f05003b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,15 +55,22 @@ public class ShareDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		Dialog dialog = new Dialog(getActivity());
-
 		dialog.setContentView(R.layout.share_dialog);
+
+
+		//投稿スペースなどを画面サイズに対応した大きさにする
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
+
+
+
+		sendContentText = (TextView) dialog.findViewById(R.id.sendContentText);
+		sendContentText.setWidth(display.getWidth()-40);
+
+		shareButton = (Button) dialog.findViewById(R.id.button_share);
+		shareButton.setWidth(display.getWidth()-40);
 
 		Resources res = getResources();
 		dialog.setTitle(res.getString(R.string.share));
-
-		//投稿内容
-		sendContentText = (TextView) dialog.findViewById(R.id.sendContentText);
-
 
 
 		/*
@@ -116,7 +124,6 @@ public class ShareDialogFragment extends DialogFragment {
 
 
 		//SNSに投稿
-		shareButton = (Button) dialog.findViewById(R.id.button_share);
 		shareButton.setOnClickListener(new OnClickListener() {
 
 			@Override
