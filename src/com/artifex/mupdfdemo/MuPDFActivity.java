@@ -85,7 +85,7 @@ public class MuPDFActivity extends FragmentActivity
 	private AsyncTask<Void,Void,MuPDFAlert> mAlertTask;
 	private AlertDialog mAlertDialog;
 
-
+	 private boolean isResumed = false;
 
 	public void createAlertWaiter() {
 		mAlertsActive = true;
@@ -249,6 +249,8 @@ public class MuPDFActivity extends FragmentActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
+
 
 
 		mAlertBuilder = new AlertDialog.Builder(this);
@@ -606,9 +608,7 @@ public class MuPDFActivity extends FragmentActivity
 		*/
 
 		//added by aoyagi シェア機能
-		mShareButton.setOnClickListener(new FBOnClickListener());
-
-
+		mShareButton.setOnClickListener(new ShareOnClickListener());
 
 		if (core.hasOutline()) {
 			mOutlineButton.setOnClickListener(new View.OnClickListener() {
@@ -663,17 +663,17 @@ public class MuPDFActivity extends FragmentActivity
 
 	//added by aoyagi
 	//facebookログイン用のオンクリックリスナー
-	private class FBOnClickListener implements View.OnClickListener{
-
-
+	private class ShareOnClickListener implements View.OnClickListener{
 		@Override
 		public void onClick(View v) {
 			FragmentManager mFragmentManager = getSupportFragmentManager();
 			ShareDialogFragment mShareDialogFragment = new ShareDialogFragment();
+
 			mShareDialogFragment.show(mFragmentManager, "share_dialog");
 
 		}
 	}
+
 
 
 

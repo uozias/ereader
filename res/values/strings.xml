@@ -25,4 +25,7 @@
     <string name="ad_dummy">ここに宣伝を載せる</string>
     <string name="share">シェアする</string>
     <string name="app_id">325349090935088</string>
+    <string name="facebook">Facebook</string>
+    <string name="mixi">Mixi</string>
+    <string name="twitter">Twitter</string>
 </resources>

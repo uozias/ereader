@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="400dp"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/textView1"
+        android:id="@+id/sendContentText"
         android:layout_width="match_parent"
         android:layout_height="100dp"
 
@@ -20,33 +22,77 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
 
-        <com.facebook.widget.LoginButton
-            android:id="@+id/button_auth_facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/button_auth_twitter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:text="twitter" />
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/facebookLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/facebook"
+                 android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/button_auth_mixi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:text="mixi" />
+            <ToggleButton
+                android:id="@+id/facebookButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton"
+                 android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/twitterLabel"
+                android:gravity="center"
+                 android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/twitter"
+                android:layout_weight="1" />
+
+            <ToggleButton
+                android:id="@+id/twitterButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton"
+                 android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/mixiLabel"
+                android:gravity="center"
+				 android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mixi"
+                 android:layout_weight="1"  />
+
+            <ToggleButton
+                android:id="@+id/mixiButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton"
+                 android:layout_weight="1" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

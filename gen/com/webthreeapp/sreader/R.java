@@ -261,10 +261,7 @@ containing a value of this type.
     public static final class id {
         public static final int adList=0x7f050005;
         public static final int ad_space_view_in_reader=0x7f050003;
-        public static final int button_auth_facebook=0x7f050035;
-        public static final int button_auth_mixi=0x7f050037;
-        public static final int button_auth_twitter=0x7f050036;
-        public static final int button_share=0x7f050034;
+        public static final int button_share=0x7f050035;
         public static final int cancel=0x7f05000f;
         public static final int cancelSelectButton=0x7f050014;
         public static final int com_facebook_login_activity_progress_bar=0x7f05001d;
@@ -289,11 +286,15 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f05002e;
         public static final int copySelectButton=0x7f050016;
         public static final int docNameText=0x7f050008;
+        public static final int facebookButton=0x7f050037;
+        public static final int facebookLabel=0x7f050036;
         public static final int icon=0x7f050032;
         public static final int info=0x7f05001a;
         public static final int large=0x7f050002;
         public static final int linkButton=0x7f050009;
         public static final int lowerButtons=0x7f050017;
+        public static final int mixiButton=0x7f05003b;
+        public static final int mixiLabel=0x7f05003a;
         public static final int name=0x7f050033;
         public static final int normal=0x7f050001;
         public static final int outlineButton=0x7f05000b;
@@ -306,6 +307,7 @@ containing a value of this type.
         public static final int searchButton=0x7f05000d;
         public static final int searchForward=0x7f050012;
         public static final int searchText=0x7f050010;
+        public static final int sendContentText=0x7f050034;
         public static final int shareButton=0x7f05000a;
         public static final int small=0x7f050000;
         public static final int strikeOutButton=0x7f050015;
@@ -315,6 +317,8 @@ containing a value of this type.
         public static final int topBar=0x7f050007;
         public static final int topBar2=0x7f05000e;
         public static final int topBar3=0x7f050013;
+        public static final int twitterButton=0x7f050039;
+        public static final int twitterLabel=0x7f050038;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -372,7 +376,9 @@ containing a value of this type.
         public static final int content_failure=0x7f08001e;
         public static final int copy=0x7f08002c;
         public static final int enter_password=0x7f080025;
+        public static final int facebook=0x7f080032;
         public static final int link_control=0x7f080028;
+        public static final int mixi=0x7f080033;
         public static final int no_further_occurences_found=0x7f080029;
         public static final int no_media_hint=0x7f08001c;
         public static final int no_media_warning=0x7f08001b;
@@ -389,6 +395,7 @@ containing a value of this type.
         public static final int strike_out=0x7f08002d;
         public static final int text_not_found=0x7f080026;
         public static final int top_text=0x7f08002e;
+        public static final int twitter=0x7f080034;
         public static final int version=0x7f08001a;
     }
     public static final class style {
