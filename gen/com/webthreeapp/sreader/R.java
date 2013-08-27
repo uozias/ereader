@@ -12,6 +12,11 @@ public final class R {
         public static final int info=0x7f040000;
     }
     public static final class attr {
+        /**  We need a mask drawable to mask the background, then draw the track 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int backgroundMask=0x7f010024;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -32,6 +37,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int done_button_text=0x7f010004;
+        /**  drawablw to use when the switch is in the unchecked/"off" state. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int drawableOff=0x7f010017;
+        /**  drawablw to use when the switch is in the checked/"on" state. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int drawableOn=0x7f010016;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -56,6 +71,15 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int is_cropped=0x7f010011;
+        /** 
+             the track drawable will be drawn on top of these background. So if
+             these back grounds were to be visible, the track has to have transparency
+        
+ The background when left side of the switch is visible 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int leftBackground=0x7f010022;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -80,6 +104,22 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int multi_select=0x7f010007;
+        /**  Default style for the Switch widget. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int mySwitchStyleAttr=0x7f01002d;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>horizontal</code></td><td>1</td><td> the switch moves only on the x-axis(horizontally) </td></tr>
+<tr><td><code>vertical</code></td><td>0</td><td> the switch moves only on the y-axis(vertically) </td></tr>
+</table>
+         */
+        public static final int orientation=0x7f010021;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -92,6 +132,15 @@ containing a value of this type.
 </table>
          */
         public static final int preset_size=0x7f010010;
+        /**  if the switch should operate like iOS UISwitch 
+         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pushStyle=0x7f010018;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -108,6 +157,11 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int results_limit=0x7f010009;
+        /**  The background when right side of the switch is visible 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int rightBackground=0x7f010023;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -140,6 +194,165 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int show_title_bar=0x7f010002;
+        /**  Minimum height for the switch component 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int switchMinHeight=0x7f01001f;
+        /**  Minimum width for the switch component 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int switchMinWidth=0x7f01001e;
+        /**  Minimum space between the switch and caption text 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int switchPadding=0x7f010020;
+        /**  TextAppearance style for text displayed on the switch thumb. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int switchTextAppearanceAttrib=0x7f01001d;
+        /**  Present the text in ALL CAPS. This may use a small-caps form when available. 
+         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textAllCaps=0x7f01002c;
+        /**  Text color. 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColor=0x7f010025;
+        /**  Color of the text selection highlight. 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColorHighlight=0x7f010029;
+        /**  Color of the hint text. 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColorHint=0x7f01002a;
+        /**  Color of the links. 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColorLink=0x7f01002b;
+        /**  Text to use when the switch is in the unchecked/"off" state. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+         */
+        public static final int textOff=0x7f010015;
+        /**  Text to use when the switch is in the checked/"on" state. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+         */
+        public static final int textOn=0x7f010014;
+        /**  if text should be drawn on the Thumb or On the track. 
+         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textOnThumb=0x7f010019;
+        /**  Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textSize=0x7f010026;
+        /**  Style (bold, italic, bolditalic) for the text. 
+         <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>bold</code></td><td>1</td><td></td></tr>
+<tr><td><code>italic</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int textStyle=0x7f010027;
+        /**  Drawable to use as the "thumb" that switches back and forth. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int thumb=0x7f010012;
+        /**  if the thumb should be allowed to move more beyond the switch boundaries 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int thumbExtraMovement=0x7f01001a;
+        /**  Amount of padding on either side of text within the switch thumb. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int thumbTextPadding=0x7f01001b;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -152,6 +365,38 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int title_text=0x7f010003;
+        /**  Drawable to use as the "track" that the switch thumb slides within. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int track=0x7f010013;
+        /**  Amount of padding on either side of text within the switch track. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int trackTextPadding=0x7f01001c;
+        /**  Typeface (normal, sans, serif, monospace) for the text. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>sans</code></td><td>1</td><td></td></tr>
+<tr><td><code>serif</code></td><td>2</td><td></td></tr>
+<tr><td><code>monospace</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int typeface=0x7f010028;
     }
     public static final class color {
         public static final int busy_indicator=0x7f07000a;
@@ -165,6 +410,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_connected_shadow_color=0x7f070004;
         public static final int com_facebook_usersettingsfragment_connected_text_color=0x7f070003;
         public static final int com_facebook_usersettingsfragment_not_connected_text_color=0x7f070005;
+        public static final int facebook=0x7f070014;
         public static final int page_indicator=0x7f070009;
         public static final int seek_progress=0x7f070013;
         public static final int seek_thumb=0x7f070012;
@@ -174,6 +420,7 @@ containing a value of this type.
         public static final int text_normal=0x7f07000d;
         public static final int text_pressed=0x7f07000e;
         public static final int toolbar=0x7f070008;
+        public static final int twitter=0x7f070015;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -200,125 +447,139 @@ containing a value of this type.
     }
     public static final class drawable {
         public static final int ad_dummy=0x7f020000;
-        public static final int busy=0x7f020001;
-        public static final int button=0x7f020002;
-        public static final int com_facebook_button_blue=0x7f020003;
-        public static final int com_facebook_button_blue_focused=0x7f020004;
-        public static final int com_facebook_button_blue_normal=0x7f020005;
-        public static final int com_facebook_button_blue_pressed=0x7f020006;
-        public static final int com_facebook_button_check=0x7f020007;
-        public static final int com_facebook_button_check_off=0x7f020008;
-        public static final int com_facebook_button_check_on=0x7f020009;
-        public static final int com_facebook_button_grey_focused=0x7f02000a;
-        public static final int com_facebook_button_grey_normal=0x7f02000b;
-        public static final int com_facebook_button_grey_pressed=0x7f02000c;
-        public static final int com_facebook_close=0x7f02000d;
-        public static final int com_facebook_inverse_icon=0x7f02000e;
-        public static final int com_facebook_list_divider=0x7f02000f;
-        public static final int com_facebook_list_section_header_background=0x7f020010;
-        public static final int com_facebook_loginbutton_silver=0x7f020011;
-        public static final int com_facebook_logo=0x7f020012;
-        public static final int com_facebook_picker_default_separator_color=0x7f020039;
-        public static final int com_facebook_picker_item_background=0x7f020013;
-        public static final int com_facebook_picker_list_focused=0x7f020014;
-        public static final int com_facebook_picker_list_longpressed=0x7f020015;
-        public static final int com_facebook_picker_list_pressed=0x7f020016;
-        public static final int com_facebook_picker_list_selector=0x7f020017;
-        public static final int com_facebook_picker_list_selector_background_transition=0x7f020018;
-        public static final int com_facebook_picker_list_selector_disabled=0x7f020019;
-        public static final int com_facebook_picker_magnifier=0x7f02001a;
-        public static final int com_facebook_picker_top_button=0x7f02001b;
-        public static final int com_facebook_place_default_icon=0x7f02001c;
-        public static final int com_facebook_profile_default_icon=0x7f02001d;
-        public static final int com_facebook_profile_picture_blank_portrait=0x7f02001e;
-        public static final int com_facebook_profile_picture_blank_square=0x7f02001f;
-        public static final int com_facebook_top_background=0x7f020020;
-        public static final int com_facebook_top_button=0x7f020021;
-        public static final int com_facebook_usersettingsfragment_background_gradient=0x7f020022;
-        public static final int darkdenim3=0x7f020023;
-        public static final int ic_arrow_left=0x7f020024;
-        public static final int ic_arrow_right=0x7f020025;
-        public static final int ic_arrow_up=0x7f020026;
-        public static final int ic_cancel=0x7f020027;
-        public static final int ic_clipboard=0x7f020028;
-        public static final int ic_dir=0x7f020029;
-        public static final int ic_doc=0x7f02002a;
-        public static final int ic_launcher=0x7f02002b;
-        public static final int ic_link=0x7f02002c;
-        public static final int ic_list=0x7f02002d;
-        public static final int ic_magnifying_glass=0x7f02002e;
-        public static final int ic_reflow=0x7f02002f;
-        public static final int ic_select=0x7f020030;
-        public static final int ic_strike=0x7f020031;
-        public static final int ic_updir=0x7f020032;
-        public static final int icon=0x7f020033;
-        public static final int page_num=0x7f020034;
-        public static final int search=0x7f020035;
-        public static final int seek_progress=0x7f020036;
-        public static final int seek_thumb=0x7f020037;
-        public static final int tiled_background=0x7f020038;
+        public static final int background_fenced=0x7f020001;
+        public static final int busy=0x7f020002;
+        public static final int button=0x7f020003;
+        public static final int com_facebook_button_blue=0x7f020004;
+        public static final int com_facebook_button_blue_focused=0x7f020005;
+        public static final int com_facebook_button_blue_normal=0x7f020006;
+        public static final int com_facebook_button_blue_pressed=0x7f020007;
+        public static final int com_facebook_button_check=0x7f020008;
+        public static final int com_facebook_button_check_off=0x7f020009;
+        public static final int com_facebook_button_check_on=0x7f02000a;
+        public static final int com_facebook_button_grey_focused=0x7f02000b;
+        public static final int com_facebook_button_grey_normal=0x7f02000c;
+        public static final int com_facebook_button_grey_pressed=0x7f02000d;
+        public static final int com_facebook_close=0x7f02000e;
+        public static final int com_facebook_inverse_icon=0x7f02000f;
+        public static final int com_facebook_list_divider=0x7f020010;
+        public static final int com_facebook_list_section_header_background=0x7f020011;
+        public static final int com_facebook_loginbutton_silver=0x7f020012;
+        public static final int com_facebook_logo=0x7f020013;
+        public static final int com_facebook_picker_default_separator_color=0x7f020042;
+        public static final int com_facebook_picker_item_background=0x7f020014;
+        public static final int com_facebook_picker_list_focused=0x7f020015;
+        public static final int com_facebook_picker_list_longpressed=0x7f020016;
+        public static final int com_facebook_picker_list_pressed=0x7f020017;
+        public static final int com_facebook_picker_list_selector=0x7f020018;
+        public static final int com_facebook_picker_list_selector_background_transition=0x7f020019;
+        public static final int com_facebook_picker_list_selector_disabled=0x7f02001a;
+        public static final int com_facebook_picker_magnifier=0x7f02001b;
+        public static final int com_facebook_picker_top_button=0x7f02001c;
+        public static final int com_facebook_place_default_icon=0x7f02001d;
+        public static final int com_facebook_profile_default_icon=0x7f02001e;
+        public static final int com_facebook_profile_picture_blank_portrait=0x7f02001f;
+        public static final int com_facebook_profile_picture_blank_square=0x7f020020;
+        public static final int com_facebook_top_background=0x7f020021;
+        public static final int com_facebook_top_button=0x7f020022;
+        public static final int com_facebook_usersettingsfragment_background_gradient=0x7f020023;
+        public static final int darkdenim3=0x7f020024;
+        public static final int ic_arrow_left=0x7f020025;
+        public static final int ic_arrow_right=0x7f020026;
+        public static final int ic_arrow_up=0x7f020027;
+        public static final int ic_cancel=0x7f020028;
+        public static final int ic_clipboard=0x7f020029;
+        public static final int ic_dir=0x7f02002a;
+        public static final int ic_doc=0x7f02002b;
+        public static final int ic_launcher=0x7f02002c;
+        public static final int ic_link=0x7f02002d;
+        public static final int ic_list=0x7f02002e;
+        public static final int ic_magnifying_glass=0x7f02002f;
+        public static final int ic_reflow=0x7f020030;
+        public static final int ic_select=0x7f020031;
+        public static final int ic_strike=0x7f020032;
+        public static final int ic_updir=0x7f020033;
+        public static final int icon=0x7f020034;
+        public static final int page_num=0x7f020035;
+        public static final int search=0x7f020036;
+        public static final int seek_progress=0x7f020037;
+        public static final int seek_thumb=0x7f020038;
+        public static final int sfb_background_copy=0x7f020039;
+        public static final int sgroove_copy=0x7f02003a;
+        public static final int sleft_background_copy=0x7f02003b;
+        public static final int smask_background_copy=0x7f02003c;
+        public static final int sright_background_copy=0x7f02003d;
+        public static final int stoggle_copy1=0x7f02003e;
+        public static final int stw_background_copy=0x7f02003f;
+        public static final int switch_track_green=0x7f020040;
+        public static final int tiled_background=0x7f020041;
     }
     public static final class id {
-        public static final int adList=0x7f050005;
-        public static final int ad_space_view_in_reader=0x7f050003;
-        public static final int button_share=0x7f050035;
-        public static final int cancel=0x7f05000f;
-        public static final int cancelSelectButton=0x7f050014;
-        public static final int com_facebook_login_activity_progress_bar=0x7f05001d;
-        public static final int com_facebook_picker_activity_circle=0x7f05001c;
-        public static final int com_facebook_picker_checkbox=0x7f05001f;
-        public static final int com_facebook_picker_checkbox_stub=0x7f050023;
-        public static final int com_facebook_picker_divider=0x7f050027;
-        public static final int com_facebook_picker_done_button=0x7f050026;
-        public static final int com_facebook_picker_image=0x7f050020;
-        public static final int com_facebook_picker_list_section_header=0x7f050024;
-        public static final int com_facebook_picker_list_view=0x7f05001b;
-        public static final int com_facebook_picker_profile_pic_stub=0x7f050021;
-        public static final int com_facebook_picker_row_activity_circle=0x7f05001e;
-        public static final int com_facebook_picker_search_text=0x7f05002c;
-        public static final int com_facebook_picker_title=0x7f050022;
-        public static final int com_facebook_picker_title_bar=0x7f050029;
-        public static final int com_facebook_picker_title_bar_stub=0x7f050028;
-        public static final int com_facebook_picker_top_bar=0x7f050025;
-        public static final int com_facebook_search_bar_view=0x7f05002b;
-        public static final int com_facebook_usersettingsfragment_login_button=0x7f05002f;
-        public static final int com_facebook_usersettingsfragment_logo_image=0x7f05002d;
-        public static final int com_facebook_usersettingsfragment_profile_name=0x7f05002e;
-        public static final int copySelectButton=0x7f050016;
-        public static final int docNameText=0x7f050008;
-        public static final int facebookButton=0x7f050037;
-        public static final int facebookLabel=0x7f050036;
-        public static final int icon=0x7f050032;
-        public static final int info=0x7f05001a;
+        public static final int adList=0x7f05000c;
+        public static final int ad_space_view_in_reader=0x7f05000a;
+        public static final int bold=0x7f050005;
+        public static final int button_share=0x7f05003c;
+        public static final int cancel=0x7f050016;
+        public static final int cancelSelectButton=0x7f05001b;
+        public static final int com_facebook_login_activity_progress_bar=0x7f050024;
+        public static final int com_facebook_picker_activity_circle=0x7f050023;
+        public static final int com_facebook_picker_checkbox=0x7f050026;
+        public static final int com_facebook_picker_checkbox_stub=0x7f05002a;
+        public static final int com_facebook_picker_divider=0x7f05002e;
+        public static final int com_facebook_picker_done_button=0x7f05002d;
+        public static final int com_facebook_picker_image=0x7f050027;
+        public static final int com_facebook_picker_list_section_header=0x7f05002b;
+        public static final int com_facebook_picker_list_view=0x7f050022;
+        public static final int com_facebook_picker_profile_pic_stub=0x7f050028;
+        public static final int com_facebook_picker_row_activity_circle=0x7f050025;
+        public static final int com_facebook_picker_search_text=0x7f050033;
+        public static final int com_facebook_picker_title=0x7f050029;
+        public static final int com_facebook_picker_title_bar=0x7f050030;
+        public static final int com_facebook_picker_title_bar_stub=0x7f05002f;
+        public static final int com_facebook_picker_top_bar=0x7f05002c;
+        public static final int com_facebook_search_bar_view=0x7f050032;
+        public static final int com_facebook_usersettingsfragment_login_button=0x7f050036;
+        public static final int com_facebook_usersettingsfragment_logo_image=0x7f050034;
+        public static final int com_facebook_usersettingsfragment_profile_name=0x7f050035;
+        public static final int copySelectButton=0x7f05001d;
+        public static final int docNameText=0x7f05000f;
+        public static final int facebookButton=0x7f05003e;
+        public static final int facebookLabel=0x7f05003d;
+        public static final int horizontal=0x7f050003;
+        public static final int icon=0x7f050039;
+        public static final int info=0x7f050021;
+        public static final int italic=0x7f050006;
         public static final int large=0x7f050002;
-        public static final int linkButton=0x7f050009;
-        public static final int lowerButtons=0x7f050017;
-        public static final int mixiButton=0x7f05003b;
-        public static final int mixiLabel=0x7f05003a;
-        public static final int name=0x7f050033;
+        public static final int linkButton=0x7f050010;
+        public static final int lowerButtons=0x7f05001e;
+        public static final int monospace=0x7f050009;
+        public static final int name=0x7f05003a;
         public static final int normal=0x7f050001;
-        public static final int outlineButton=0x7f05000b;
-        public static final int page=0x7f050031;
-        public static final int pageNumber=0x7f050019;
-        public static final int pageSlider=0x7f050018;
-        public static final int picker_subtitle=0x7f05002a;
-        public static final int reflowButton=0x7f05000c;
-        public static final int searchBack=0x7f050011;
-        public static final int searchButton=0x7f05000d;
-        public static final int searchForward=0x7f050012;
-        public static final int searchText=0x7f050010;
-        public static final int sendContentText=0x7f050034;
-        public static final int shareButton=0x7f05000a;
+        public static final int outlineButton=0x7f050012;
+        public static final int page=0x7f050038;
+        public static final int pageNumber=0x7f050020;
+        public static final int pageSlider=0x7f05001f;
+        public static final int picker_subtitle=0x7f050031;
+        public static final int reflowButton=0x7f050013;
+        public static final int sans=0x7f050007;
+        public static final int searchBack=0x7f050018;
+        public static final int searchButton=0x7f050014;
+        public static final int searchForward=0x7f050019;
+        public static final int searchText=0x7f050017;
+        public static final int sendContentText=0x7f05003b;
+        public static final int serif=0x7f050008;
+        public static final int shareButton=0x7f050011;
         public static final int small=0x7f050000;
-        public static final int strikeOutButton=0x7f050015;
-        public static final int switcher=0x7f050006;
-        public static final int textView1=0x7f050004;
-        public static final int title=0x7f050030;
-        public static final int topBar=0x7f050007;
-        public static final int topBar2=0x7f05000e;
-        public static final int topBar3=0x7f050013;
-        public static final int twitterButton=0x7f050039;
-        public static final int twitterLabel=0x7f050038;
+        public static final int strikeOutButton=0x7f05001c;
+        public static final int switcher=0x7f05000d;
+        public static final int textView1=0x7f05000b;
+        public static final int title=0x7f050037;
+        public static final int topBar=0x7f05000e;
+        public static final int topBar2=0x7f050015;
+        public static final int topBar3=0x7f05001a;
+        public static final int twitterButton=0x7f050040;
+        public static final int twitterLabel=0x7f05003f;
+        public static final int vertical=0x7f050004;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -402,11 +663,13 @@ containing a value of this type.
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
          */
         public static final int AppBaseTheme=0x7f090002;
@@ -414,10 +677,350 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090003;
+        public static final int SwitchText=0x7f090004;
         public static final int com_facebook_loginview_default_style=0x7f090000;
         public static final int com_facebook_loginview_silver_style=0x7f090001;
+        public static final int mySwitchStyle=0x7f090005;
+        public static final int mySwitchTextAppearance=0x7f090006;
     }
     public static final class styleable {
+        /** Attributes that can be used with a MySwitch.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #MySwitch_backgroundMask com.webthreeapp.sreader:backgroundMask}</code></td><td> We need a mask drawable to mask the background, then draw the track </td></tr>
+           <tr><td><code>{@link #MySwitch_drawableOff com.webthreeapp.sreader:drawableOff}</code></td><td> drawablw to use when the switch is in the unchecked/"off" state.</td></tr>
+           <tr><td><code>{@link #MySwitch_drawableOn com.webthreeapp.sreader:drawableOn}</code></td><td> drawablw to use when the switch is in the checked/"on" state.</td></tr>
+           <tr><td><code>{@link #MySwitch_leftBackground com.webthreeapp.sreader:leftBackground}</code></td><td>
+             the track drawable will be drawn on top of these background.</td></tr>
+           <tr><td><code>{@link #MySwitch_orientation com.webthreeapp.sreader:orientation}</code></td><td></td></tr>
+           <tr><td><code>{@link #MySwitch_pushStyle com.webthreeapp.sreader:pushStyle}</code></td><td> if the switch should operate like iOS UISwitch </td></tr>
+           <tr><td><code>{@link #MySwitch_rightBackground com.webthreeapp.sreader:rightBackground}</code></td><td> The background when right side of the switch is visible </td></tr>
+           <tr><td><code>{@link #MySwitch_switchMinHeight com.webthreeapp.sreader:switchMinHeight}</code></td><td> Minimum height for the switch component </td></tr>
+           <tr><td><code>{@link #MySwitch_switchMinWidth com.webthreeapp.sreader:switchMinWidth}</code></td><td> Minimum width for the switch component </td></tr>
+           <tr><td><code>{@link #MySwitch_switchPadding com.webthreeapp.sreader:switchPadding}</code></td><td> Minimum space between the switch and caption text </td></tr>
+           <tr><td><code>{@link #MySwitch_switchTextAppearanceAttrib com.webthreeapp.sreader:switchTextAppearanceAttrib}</code></td><td> TextAppearance style for text displayed on the switch thumb.</td></tr>
+           <tr><td><code>{@link #MySwitch_textOff com.webthreeapp.sreader:textOff}</code></td><td> Text to use when the switch is in the unchecked/"off" state.</td></tr>
+           <tr><td><code>{@link #MySwitch_textOn com.webthreeapp.sreader:textOn}</code></td><td> Text to use when the switch is in the checked/"on" state.</td></tr>
+           <tr><td><code>{@link #MySwitch_textOnThumb com.webthreeapp.sreader:textOnThumb}</code></td><td> if text should be drawn on the Thumb or On the track.</td></tr>
+           <tr><td><code>{@link #MySwitch_thumb com.webthreeapp.sreader:thumb}</code></td><td> Drawable to use as the "thumb" that switches back and forth.</td></tr>
+           <tr><td><code>{@link #MySwitch_thumbExtraMovement com.webthreeapp.sreader:thumbExtraMovement}</code></td><td> if the thumb should be allowed to move more beyond the switch boundaries </td></tr>
+           <tr><td><code>{@link #MySwitch_thumbTextPadding com.webthreeapp.sreader:thumbTextPadding}</code></td><td> Amount of padding on either side of text within the switch thumb.</td></tr>
+           <tr><td><code>{@link #MySwitch_track com.webthreeapp.sreader:track}</code></td><td> Drawable to use as the "track" that the switch thumb slides within.</td></tr>
+           <tr><td><code>{@link #MySwitch_trackTextPadding com.webthreeapp.sreader:trackTextPadding}</code></td><td> Amount of padding on either side of text within the switch track.</td></tr>
+           </table>
+           @see #MySwitch_backgroundMask
+           @see #MySwitch_drawableOff
+           @see #MySwitch_drawableOn
+           @see #MySwitch_leftBackground
+           @see #MySwitch_orientation
+           @see #MySwitch_pushStyle
+           @see #MySwitch_rightBackground
+           @see #MySwitch_switchMinHeight
+           @see #MySwitch_switchMinWidth
+           @see #MySwitch_switchPadding
+           @see #MySwitch_switchTextAppearanceAttrib
+           @see #MySwitch_textOff
+           @see #MySwitch_textOn
+           @see #MySwitch_textOnThumb
+           @see #MySwitch_thumb
+           @see #MySwitch_thumbExtraMovement
+           @see #MySwitch_thumbTextPadding
+           @see #MySwitch_track
+           @see #MySwitch_trackTextPadding
+         */
+        public static final int[] MySwitch = {
+            0x7f010012, 0x7f010013, 0x7f010014, 0x7f010015,
+            0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019,
+            0x7f01001a, 0x7f01001b, 0x7f01001c, 0x7f01001d,
+            0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021,
+            0x7f010022, 0x7f010023, 0x7f010024
+        };
+        /**
+          <p>
+          @attr description
+           We need a mask drawable to mask the background, then draw the track 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:backgroundMask
+        */
+        public static final int MySwitch_backgroundMask = 18;
+        /**
+          <p>
+          @attr description
+           drawablw to use when the switch is in the unchecked/"off" state. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:drawableOff
+        */
+        public static final int MySwitch_drawableOff = 5;
+        /**
+          <p>
+          @attr description
+           drawablw to use when the switch is in the checked/"on" state. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:drawableOn
+        */
+        public static final int MySwitch_drawableOn = 4;
+        /**
+          <p>
+          @attr description
+          
+             the track drawable will be drawn on top of these background. So if
+             these back grounds were to be visible, the track has to have transparency
+        
+ The background when left side of the switch is visible 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:leftBackground
+        */
+        public static final int MySwitch_leftBackground = 16;
+        /**
+          <p>This symbol is the offset where the {@link com.webthreeapp.sreader.R.attr#orientation}
+          attribute's value can be found in the {@link #MySwitch} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>horizontal</code></td><td>1</td><td> the switch moves only on the x-axis(horizontally) </td></tr>
+<tr><td><code>vertical</code></td><td>0</td><td> the switch moves only on the y-axis(vertically) </td></tr>
+</table>
+          @attr name android:orientation
+        */
+        public static final int MySwitch_orientation = 15;
+        /**
+          <p>
+          @attr description
+           if the switch should operate like iOS UISwitch 
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:pushStyle
+        */
+        public static final int MySwitch_pushStyle = 6;
+        /**
+          <p>
+          @attr description
+           The background when right side of the switch is visible 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:rightBackground
+        */
+        public static final int MySwitch_rightBackground = 17;
+        /**
+          <p>
+          @attr description
+           Minimum height for the switch component 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:switchMinHeight
+        */
+        public static final int MySwitch_switchMinHeight = 13;
+        /**
+          <p>
+          @attr description
+           Minimum width for the switch component 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:switchMinWidth
+        */
+        public static final int MySwitch_switchMinWidth = 12;
+        /**
+          <p>
+          @attr description
+           Minimum space between the switch and caption text 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:switchPadding
+        */
+        public static final int MySwitch_switchPadding = 14;
+        /**
+          <p>
+          @attr description
+           TextAppearance style for text displayed on the switch thumb. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:switchTextAppearanceAttrib
+        */
+        public static final int MySwitch_switchTextAppearanceAttrib = 11;
+        /**
+          <p>
+          @attr description
+           Text to use when the switch is in the unchecked/"off" state. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+          <p>This is a private symbol.
+          @attr name android:textOff
+        */
+        public static final int MySwitch_textOff = 3;
+        /**
+          <p>
+          @attr description
+           Text to use when the switch is in the checked/"on" state. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+          <p>This is a private symbol.
+          @attr name android:textOn
+        */
+        public static final int MySwitch_textOn = 2;
+        /**
+          <p>
+          @attr description
+           if text should be drawn on the Thumb or On the track. 
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textOnThumb
+        */
+        public static final int MySwitch_textOnThumb = 7;
+        /**
+          <p>
+          @attr description
+           Drawable to use as the "thumb" that switches back and forth. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:thumb
+        */
+        public static final int MySwitch_thumb = 0;
+        /**
+          <p>
+          @attr description
+           if the thumb should be allowed to move more beyond the switch boundaries 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:thumbExtraMovement
+        */
+        public static final int MySwitch_thumbExtraMovement = 8;
+        /**
+          <p>
+          @attr description
+           Amount of padding on either side of text within the switch thumb. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:thumbTextPadding
+        */
+        public static final int MySwitch_thumbTextPadding = 9;
+        /**
+          <p>
+          @attr description
+           Drawable to use as the "track" that the switch thumb slides within. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name android:track
+        */
+        public static final int MySwitch_track = 1;
+        /**
+          <p>
+          @attr description
+           Amount of padding on either side of text within the switch track. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:trackTextPadding
+        */
+        public static final int MySwitch_trackTextPadding = 10;
         /** Attributes that can be used with a com_facebook_friend_picker_fragment.
            <p>Includes the following attributes:</p>
            <table>
@@ -758,5 +1361,178 @@ containing a value of this type.
           @attr name android:preset_size
         */
         public static final int com_facebook_profile_picture_view_preset_size = 0;
+        /** Attributes that can be used with a mySwitchTextAppearanceAttrib.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textAllCaps com.webthreeapp.sreader:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textColor com.webthreeapp.sreader:textColor}</code></td><td> Text color.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textColorHighlight com.webthreeapp.sreader:textColorHighlight}</code></td><td> Color of the text selection highlight.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textColorHint com.webthreeapp.sreader:textColorHint}</code></td><td> Color of the hint text.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textColorLink com.webthreeapp.sreader:textColorLink}</code></td><td> Color of the links.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textSize com.webthreeapp.sreader:textSize}</code></td><td> Size of the text.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_textStyle com.webthreeapp.sreader:textStyle}</code></td><td> Style (bold, italic, bolditalic) for the text.</td></tr>
+           <tr><td><code>{@link #mySwitchTextAppearanceAttrib_typeface com.webthreeapp.sreader:typeface}</code></td><td> Typeface (normal, sans, serif, monospace) for the text.</td></tr>
+           </table>
+           @see #mySwitchTextAppearanceAttrib_textAllCaps
+           @see #mySwitchTextAppearanceAttrib_textColor
+           @see #mySwitchTextAppearanceAttrib_textColorHighlight
+           @see #mySwitchTextAppearanceAttrib_textColorHint
+           @see #mySwitchTextAppearanceAttrib_textColorLink
+           @see #mySwitchTextAppearanceAttrib_textSize
+           @see #mySwitchTextAppearanceAttrib_textStyle
+           @see #mySwitchTextAppearanceAttrib_typeface
+         */
+        public static final int[] mySwitchTextAppearanceAttrib = {
+            0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028,
+            0x7f010029, 0x7f01002a, 0x7f01002b, 0x7f01002c
+        };
+        /**
+          <p>
+          @attr description
+           Present the text in ALL CAPS. This may use a small-caps form when available. 
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textAllCaps
+        */
+        public static final int mySwitchTextAppearanceAttrib_textAllCaps = 7;
+        /**
+          <p>
+          @attr description
+           Text color. 
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textColor
+        */
+        public static final int mySwitchTextAppearanceAttrib_textColor = 0;
+        /**
+          <p>
+          @attr description
+           Color of the text selection highlight. 
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textColorHighlight
+        */
+        public static final int mySwitchTextAppearanceAttrib_textColorHighlight = 4;
+        /**
+          <p>
+          @attr description
+           Color of the hint text. 
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textColorHint
+        */
+        public static final int mySwitchTextAppearanceAttrib_textColorHint = 5;
+        /**
+          <p>
+          @attr description
+           Color of the links. 
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textColorLink
+        */
+        public static final int mySwitchTextAppearanceAttrib_textColorLink = 6;
+        /**
+          <p>
+          @attr description
+           Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:textSize
+        */
+        public static final int mySwitchTextAppearanceAttrib_textSize = 1;
+        /**
+          <p>
+          @attr description
+           Style (bold, italic, bolditalic) for the text. 
+
+
+          <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>bold</code></td><td>1</td><td></td></tr>
+<tr><td><code>italic</code></td><td>2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name android:textStyle
+        */
+        public static final int mySwitchTextAppearanceAttrib_textStyle = 2;
+        /**
+          <p>
+          @attr description
+           Typeface (normal, sans, serif, monospace) for the text. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0</td><td></td></tr>
+<tr><td><code>sans</code></td><td>1</td><td></td></tr>
+<tr><td><code>serif</code></td><td>2</td><td></td></tr>
+<tr><td><code>monospace</code></td><td>3</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name android:typeface
+        */
+        public static final int mySwitchTextAppearanceAttrib_typeface = 3;
     };
 }

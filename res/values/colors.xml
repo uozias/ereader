@@ -13,4 +13,7 @@
     <color name="text_border_focused">#000000</color>
     <color name="seek_thumb">#2572AC</color>
     <color name="seek_progress">#FFFFFF</color>
+    <color name="facebook">#3b5998</color>
+    <color name="twitter">#00acee</color>
+    
 </resources>

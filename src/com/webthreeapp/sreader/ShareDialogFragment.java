@@ -16,7 +16,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookOperationCanceledException;
@@ -37,9 +36,9 @@ public class ShareDialogFragment extends DialogFragment {
 
 	private String TAG = "ShareDialogFragment";
 
-	private ToggleButton facebookButton = null;
-	private ToggleButton twitterButton = null;
-	private ToggleButton mixiButton = null;
+	private MySwitch facebookButton = null;
+	private MySwitch twitterButton = null;
+
 	private Button shareButton = null;
 	private TextView sendContentText = null;
 
@@ -71,8 +70,12 @@ public class ShareDialogFragment extends DialogFragment {
 		 */
 
 		//facebookボタン
-		facebookButton = (ToggleButton) dialog.findViewById(R.id.facebookButton);
-		facebookButton.setOnCheckedChangeListener(new FBOnCheckedChangeListener(this));
+		facebookButton = (MySwitch) dialog.findViewById(R.id.facebookButton);
+		facebookButton.setOnCheckedChangeListener(new FBOnCheckedChangeListener(this)); //トグルボタンバージョン
+		//facebookButton.setOnDrawerOpenListener(new FBOnDrawerOpenListener()); //slidingDrawerを使ったバージョン
+		//facebookButton.setOnDrawerCloseListener(new FBOnDrawerCloseListener(this));
+
+
 
 		//facebook session管理
 		Session session = Session.getActiveSession();
@@ -100,7 +103,7 @@ public class ShareDialogFragment extends DialogFragment {
 
 
 		//twitterボタン
-		twitterButton = (ToggleButton) dialog.findViewById(R.id.twitterButton);
+		twitterButton = (MySwitch) dialog.findViewById(R.id.twitterButton);
 		twitterButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -110,16 +113,7 @@ public class ShareDialogFragment extends DialogFragment {
 			}
 		});
 
-		//mixiボタン
-		mixiButton = (ToggleButton) dialog.findViewById(R.id.mixiButton);
-		mixiButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO 自動生成されたメソッド・スタブ
-
-			}
-		});
 
 		//SNSに投稿
 		shareButton = (Button) dialog.findViewById(R.id.button_share);
@@ -138,7 +132,9 @@ public class ShareDialogFragment extends DialogFragment {
 		return dialog;
 	}
 
-	//facebookボタンのクリック時
+
+	//facebookボタンのクリック時(トグルボタンバージョン)
+
 	public class FBOnCheckedChangeListener implements OnCheckedChangeListener {
 
 		Fragment fragment = null;
@@ -181,6 +177,55 @@ public class ShareDialogFragment extends DialogFragment {
 		}
 	}
 
+	 /*
+	  * slideing drawerを使ったバージョン
+	public class FBOnDrawerOpenListener implements SlidingDrawer.OnDrawerOpenListener {
+
+
+
+
+		@Override
+		public void onDrawerOpened() {
+
+			Session session = Session.getActiveSession();
+			//チェックが外れた時 = ログアウト
+			if (!session.isClosed() ) {
+				session.closeAndClearTokenInformation();
+			};
+
+
+		}
+	}
+
+	public class FBOnDrawerCloseListener implements SlidingDrawer.OnDrawerCloseListener {
+
+		Fragment fragment = null;
+
+
+		public FBOnDrawerCloseListener(Fragment fragment) {
+			this.fragment = fragment;
+
+		}
+		@Override
+		public void onDrawerClosed() {
+			Session session = Session.getActiveSession();
+			if (!session.isOpened() ) {
+				if (session.isClosed()) {
+					//セッションが閉じてたら新しいセッションを開始
+					session = new Session(getActivity());
+					Session.setActiveSession(session);
+				}
+				//セッションオープンを試みる
+				session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
+			} else {
+				//既にOPEN状態だった時は
+				Session.openActiveSession(getActivity(), fragment, true, statusCallback);
+
+			}
+
+		}
+	}
+	 */
 
 
 	private void sendFBFeed(String feedString) {
@@ -222,6 +267,7 @@ public class ShareDialogFragment extends DialogFragment {
 
 		if (error == null) {
 			Toast.makeText(getActivity(), "facebook投稿成功", Toast.LENGTH_LONG).show();
+			sendContentText.setText(""); //投稿成功したら空に
 
 		} else {
 			Toast.makeText(getActivity(), "facebook投稿失敗", Toast.LENGTH_LONG).show();
