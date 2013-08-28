@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -46,12 +47,12 @@ public class ShareDialogFragment extends DialogFragment {
 	private TextView sendContentText = null;
 
 	private boolean fbLogin = false;
+	private boolean sendingFbFeed = false;
 
 	//Facebookのパーミッション
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 
 	private Session.StatusCallback statusCallback = new SessionStatusCallback();
-
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -59,21 +60,17 @@ public class ShareDialogFragment extends DialogFragment {
 		Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.share_dialog);
 
-
 		//投稿スペースなどを画面サイズに対応した大きさにする
 		Display display = getActivity().getWindowManager().getDefaultDisplay();
 
-
-
 		sendContentText = (TextView) dialog.findViewById(R.id.sendContentText);
-		sendContentText.setWidth(display.getWidth()-40);
+		sendContentText.setWidth(display.getWidth() - 40);
 
 		shareButton = (Button) dialog.findViewById(R.id.button_share);
-		shareButton.setWidth(display.getWidth()-40);
+		shareButton.setWidth(display.getWidth() - 40);
 
 		Resources res = getResources();
 		dialog.setTitle(res.getString(R.string.share));
-
 
 		/*
 		 * ボタンにイベント設定
@@ -81,11 +78,9 @@ public class ShareDialogFragment extends DialogFragment {
 
 		//facebookボタン
 		facebookButton = (MySwitch) dialog.findViewById(R.id.facebookButton);
-		facebookButton.setOnCheckedChangeListener(new FBOnCheckedChangeListener(this)); //トグルボタンバージョン
+		facebookButton.setOnCheckedChangeListener(new FBOnCheckedChangeListener(this, savedInstanceState)); //トグルボタンバージョン
 		//facebookButton.setOnDrawerOpenListener(new FBOnDrawerOpenListener()); //slidingDrawerを使ったバージョン
 		//facebookButton.setOnDrawerCloseListener(new FBOnDrawerCloseListener(this));
-
-
 
 		//facebook session管理
 		Session session = Session.getActiveSession();
@@ -103,14 +98,13 @@ public class ShareDialogFragment extends DialogFragment {
 				session.openForPublish(new Session.OpenRequest(this).setCallback(statusCallback).setPermissions(PERMISSIONS));
 			}
 			*/
-		}else{
+		} else {
 			//開いて、すでにセッションがOPENだったら
-			if(session.getState() == SessionState.OPENED){
+			if (session.getState() == SessionState.OPENED) {
 				fbLogin = true;
 				facebookButton.setChecked(true); //ボタンをチェック状態に
 			}
 		}
-
 
 		//twitterボタン
 		twitterButton = (MySwitch) dialog.findViewById(R.id.twitterButton);
@@ -122,8 +116,6 @@ public class ShareDialogFragment extends DialogFragment {
 
 			}
 		});
-
-
 
 		//SNSに投稿
 		shareButton.setOnClickListener(new OnClickListener() {
@@ -141,104 +133,120 @@ public class ShareDialogFragment extends DialogFragment {
 		return dialog;
 	}
 
-
 	//facebookボタンのクリック時(トグルボタンバージョン)
 
 	public class FBOnCheckedChangeListener implements OnCheckedChangeListener {
 
 		Fragment fragment = null;
+		private Bundle savedInstanceState;
 
-		public FBOnCheckedChangeListener(Fragment fragment) {
+		public FBOnCheckedChangeListener(Fragment fragment, Bundle savedInstanceState) {
 			this.fragment = fragment;
+			this.savedInstanceState = savedInstanceState;
 
 		}
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-
 			Session session = Session.getActiveSession();
 
 
-			if(isChecked){
+			if (isChecked) {
 				//チェックされた時 = ログイン
 				//もしセッションがOPEN状態でなければ
-				if (!session.isOpened() ) {
-					if (session.isClosed()) {
+				if (session == null) {
+					if (savedInstanceState != null) {
+						session = Session.restoreSession(getActivity(), null, statusCallback, savedInstanceState);
+					}
+					if (session == null) {
+						session = new Session(getActivity());
+					}
+					Session.setActiveSession(session);
+					if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
+						session.openForRead(new Session.OpenRequest(getActivity()).setCallback(statusCallback));
+					}
+					return;
+				}
+				SessionState state = session.getState();
+				if (state != SessionState.OPENED ) {
+					if (state == SessionState.CLOSED) {
 						//セッションが閉じてたら新しいセッションを開始
 						session = new Session(getActivity());
 						Session.setActiveSession(session);
 					}
-					//セッションオープンを試みる
-					//session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
-					session.openForRead(new OpenRequest(getActivity()).setCallback(statusCallback));
-				} else {
-					//既にOPEN状態だった時は
-					Session.openActiveSession(getActivity(), fragment, true, statusCallback);
+					if (state != SessionState.OPENING){
+						//オープン処理中じゃなきゃセッションオープンを試みる
+						//session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
+						Session.OpenRequest openRequest = new OpenRequest(getActivity()).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
+						session.openForRead(openRequest);
+					}
 
 				}
-			}else{
+
+			} else {
 				//チェックが外れた時 = ログアウト
-				if (!session.isClosed() ) {
+				if (!session.isClosed()) {
 					session.closeAndClearTokenInformation();
-				};
+				}
+				;
 			}
 
 		}
 	}
 
-	 /*
-	  * slideing drawerを使ったバージョン
+	/*
+	 * slideing drawerを使ったバージョン
 	public class FBOnDrawerOpenListener implements SlidingDrawer.OnDrawerOpenListener {
 
 
 
 
-		@Override
-		public void onDrawerOpened() {
+	@Override
+	public void onDrawerOpened() {
 
-			Session session = Session.getActiveSession();
-			//チェックが外れた時 = ログアウト
-			if (!session.isClosed() ) {
-				session.closeAndClearTokenInformation();
-			};
+		Session session = Session.getActiveSession();
+		//チェックが外れた時 = ログアウト
+		if (!session.isClosed() ) {
+			session.closeAndClearTokenInformation();
+		};
 
 
-		}
+	}
 	}
 
 	public class FBOnDrawerCloseListener implements SlidingDrawer.OnDrawerCloseListener {
 
-		Fragment fragment = null;
+	Fragment fragment = null;
 
 
-		public FBOnDrawerCloseListener(Fragment fragment) {
-			this.fragment = fragment;
+	public FBOnDrawerCloseListener(Fragment fragment) {
+		this.fragment = fragment;
 
-		}
-		@Override
-		public void onDrawerClosed() {
-			Session session = Session.getActiveSession();
-			if (!session.isOpened() ) {
-				if (session.isClosed()) {
-					//セッションが閉じてたら新しいセッションを開始
-					session = new Session(getActivity());
-					Session.setActiveSession(session);
-				}
-				//セッションオープンを試みる
-				session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
-			} else {
-				//既にOPEN状態だった時は
-				Session.openActiveSession(getActivity(), fragment, true, statusCallback);
-
-			}
-
-		}
 	}
-	 */
+	@Override
+	public void onDrawerClosed() {
+		Session session = Session.getActiveSession();
+		if (!session.isOpened() ) {
+			if (session.isClosed()) {
+				//セッションが閉じてたら新しいセッションを開始
+				session = new Session(getActivity());
+				Session.setActiveSession(session);
+			}
+			//セッションオープンを試みる
+			session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
+		} else {
+			//既にOPEN状態だった時は
+			Session.openActiveSession(getActivity(), fragment, true, statusCallback);
 
+		}
+
+	}
+	}
+	*/
 
 	private void sendFBFeed(String feedString) {
+		sendingFbFeed = true;
 		Session session = Session.getActiveSession();
 
 		// Check for publish permissions
@@ -247,7 +255,8 @@ public class ShareDialogFragment extends DialogFragment {
 		if (!isSubsetOf(PERMISSIONS, permissions)) {
 			//パーミッションをリクエスト
 			//フラグメントじゃなくてアクティビティの方につけてみた
-			Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(getActivity(), PERMISSIONS).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
+			Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(getActivity(),
+					PERMISSIONS).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
 			session.requestNewPublishPermissions(newPermissionsRequest);
 			return; //迂回してしまう
 		}
@@ -279,6 +288,7 @@ public class ShareDialogFragment extends DialogFragment {
 		if (error == null) {
 			Toast.makeText(getActivity(), "facebook投稿成功", Toast.LENGTH_LONG).show();
 			sendContentText.setText(""); //投稿成功したら空に
+			sendingFbFeed = false;
 
 		} else {
 			Toast.makeText(getActivity(), "facebook投稿失敗", Toast.LENGTH_LONG).show();
@@ -292,35 +302,41 @@ public class ShareDialogFragment extends DialogFragment {
 		@Override
 		public void call(Session session, SessionState sessionState, Exception exception) {
 
-
 			//ログインエラーがあったら
 			if ((exception instanceof FacebookOperationCanceledException || exception instanceof FacebookAuthorizationException)) {
 				fbLogin = false;
 				facebookButton.setChecked(false);//トグルボタンをオフに
-			}else if (sessionState == SessionState.OPENED_TOKEN_UPDATED){
-
-				//トークンアップデート(=権限の更新？)の時は、投稿を試みる
-				sendFBFeed(sendContentText.getText().toString());
-			}
-
-
-			if (sessionState == SessionState.OPENED|| sessionState == SessionState.OPENING || sessionState == SessionState.OPENED_TOKEN_UPDATED)
-			{
-				//ログインしている時
-				fbLogin = true;
-				if(sessionState == SessionState.OPENED || sessionState == SessionState.OPENED_TOKEN_UPDATED){
-					Toast.makeText(getActivity(), "facebook認証成功", Toast.LENGTH_SHORT).show();
-				}
-				if(!facebookButton.isChecked()){
-					facebookButton.setChecked(true);//トグルボタンをオンに
-				}
-
 			} else {
-				fbLogin = false;
-				if(facebookButton.isChecked()){
-					facebookButton.setChecked(false);//トグルボタンをオフに
-				}
+
+					if (sendingFbFeed == true) {
+						//まだ送信中の時は、投稿を試みる
+						sendFBFeed(sendContentText.getText().toString());
+					}
+
+					if (sessionState == SessionState.OPENED || sessionState == SessionState.OPENED_TOKEN_UPDATED){
+						//ログインしている時
+						fbLogin = true;
+
+						Toast.makeText(getActivity(), "facebook認証成功", Toast.LENGTH_SHORT).show();
+
+						if (!facebookButton.isChecked()) {
+							facebookButton.setChecked(true);//トグルボタンをオンに
+						}
+
+					}
+
+					//OPENING時はなにもしない
+
+					if (sessionState == SessionState.CLOSED || sessionState == SessionState.CLOSED_LOGIN_FAILED){
+						fbLogin = false;
+						if (facebookButton.isChecked()) {
+							facebookButton.setChecked(false);//トグルボタンをオフに
+						}
+					}
+
 			}
+
+
 		}
 	}
 
@@ -363,6 +379,12 @@ public class ShareDialogFragment extends DialogFragment {
 
 		Session session = Session.getActiveSession();
 		Session.saveSession(session, outState);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
 	}
 
 }
