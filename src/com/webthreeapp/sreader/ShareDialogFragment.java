@@ -49,6 +49,8 @@ public class ShareDialogFragment extends DialogFragment {
 	private boolean fbLogin = false;
 	private boolean sendingFbFeed = false;
 
+	private Bundle savedInstanceState = null;
+
 	//Facebookのパーミッション
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 
@@ -56,6 +58,8 @@ public class ShareDialogFragment extends DialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+		this.savedInstanceState = savedInstanceState;
 
 		Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.share_dialog);
@@ -94,14 +98,14 @@ public class ShareDialogFragment extends DialogFragment {
 			Session.setActiveSession(session);
 
 			 //facebookのオンオフを記録しておいて、ダイアログ起動時に反映すうｒ
-			if (session.getState().equals(SessionState.OPENED)) {
+			if (session.getState() == SessionState.OPENED || session.getState() == SessionState.OPENED_TOKEN_UPDATED) {
 				fbLogin = true;
 				facebookButton.setChecked(true); //ボタンをチェック状態に
 			}
 
 		} else {
 			//開いて、すでにセッションがOPENだったら
-			if (session.getState() == SessionState.OPENED) {
+			if (session.getState() == SessionState.OPENED || session.getState() == SessionState.OPENED_TOKEN_UPDATED) {
 				fbLogin = true;
 				facebookButton.setChecked(true); //ボタンをチェック状態に
 			}
@@ -150,50 +154,64 @@ public class ShareDialogFragment extends DialogFragment {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-			Session session = Session.getActiveSession();
-
 
 			if (isChecked) {
 				//チェックされた時 = ログイン
-				//もしセッションがOPEN状態でなければ
-				if (session == null) {
-					if (savedInstanceState != null) {
-						session = Session.restoreSession(getActivity(), null, statusCallback, savedInstanceState);
-					}
-					if (session == null) {
-						session = new Session(getActivity());
-					}
-					Session.setActiveSession(session);
-					if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
-						session.openForRead(new Session.OpenRequest(getActivity()).setCallback(statusCallback));
-					}
-					return;
-				}
-				SessionState state = session.getState();
-				if (state != SessionState.OPENED ) {
-					if (state == SessionState.CLOSED) {
-						//セッションが閉じてたら新しいセッションを開始
-						session = new Session(getActivity());
-						Session.setActiveSession(session);
-					}
-					if (state != SessionState.OPENING && state != SessionState.OPENED && state != SessionState.OPENED_TOKEN_UPDATED){
-						//オープンしてるか、オープン処理中じゃなきゃセッションオープンを試みる
-						//session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
-						Session.OpenRequest openRequest = new OpenRequest(getActivity()).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
-						session.openForRead(openRequest);
-					}
-
-				}
-
+				checkLogin();
 			} else {
+				Session session = Session.getActiveSession();
 				//チェックが外れた時 = ログアウト
 				if (!session.isClosed()) {
 					session.closeAndClearTokenInformation();
 				}
-				;
 			}
 
 		}
+	}
+
+	//ログイン処理
+	public boolean checkLogin(){
+		Session session = Session.getActiveSession();
+
+
+		//もしセッションがOPEN状態でなければ
+		if (session == null) {
+			if (savedInstanceState != null) {
+				session = Session.restoreSession(getActivity(), null, statusCallback, savedInstanceState);
+			}
+			if (session == null) {
+				session = new Session(getActivity());
+			}
+			Session.setActiveSession(session);
+			if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
+				session.openForRead(new Session.OpenRequest(getActivity()).setCallback(statusCallback));
+
+				return false; //新たにログインする時はfalseを返す
+			}
+
+		}
+		SessionState state = session.getState();
+		if (state != SessionState.OPENED ) {
+			if (state == SessionState.CLOSED || state == SessionState.CLOSED_LOGIN_FAILED) {
+				//セッションが閉じてたら新しいセッションを開始
+				session = new Session(getActivity());
+				Session.setActiveSession(session);
+				return false; //新たにログインする時はfalseを返す
+
+			}
+			if (state != SessionState.OPENING && state != SessionState.OPENED && state != SessionState.OPENED_TOKEN_UPDATED){
+				//オープンしてるか、オープン処理中じゃなきゃセッションオープンを試みる
+				//session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
+				Session.OpenRequest openRequest = new OpenRequest(getActivity()).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
+				session.openForRead(openRequest);
+
+				return false; //新たにログインする時はfalseを返す
+			}
+
+		}
+
+		return true; //ログイン済みならtrueを変えす
+
 	}
 
 	/*
@@ -249,6 +267,11 @@ public class ShareDialogFragment extends DialogFragment {
 	private void sendFBFeed(String feedString) {
 		sendingFbFeed = true;
 		Session session = Session.getActiveSession();
+
+		//ログインチェック
+		if(checkLogin() != true){
+			return; //ログインされてない時はまた今度
+		}
 
 		// Check for publish permissions
 		List<String> permissions = session.getPermissions();
