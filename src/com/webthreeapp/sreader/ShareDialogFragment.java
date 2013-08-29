@@ -92,12 +92,13 @@ public class ShareDialogFragment extends DialogFragment {
 				session = new Session(getActivity());
 			}
 			Session.setActiveSession(session);
-			/*
-			 * TODO facebookのオンオフを記録しておいて、ダイアログ起動時に反映すうｒ
-			if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
-				session.openForPublish(new Session.OpenRequest(this).setCallback(statusCallback).setPermissions(PERMISSIONS));
+
+			 //facebookのオンオフを記録しておいて、ダイアログ起動時に反映すうｒ
+			if (session.getState().equals(SessionState.OPENED)) {
+				fbLogin = true;
+				facebookButton.setChecked(true); //ボタンをチェック状態に
 			}
-			*/
+
 		} else {
 			//開いて、すでにセッションがOPENだったら
 			if (session.getState() == SessionState.OPENED) {
@@ -175,8 +176,8 @@ public class ShareDialogFragment extends DialogFragment {
 						session = new Session(getActivity());
 						Session.setActiveSession(session);
 					}
-					if (state != SessionState.OPENING){
-						//オープン処理中じゃなきゃセッションオープンを試みる
+					if (state != SessionState.OPENING && state != SessionState.OPENED && state != SessionState.OPENED_TOKEN_UPDATED){
+						//オープンしてるか、オープン処理中じゃなきゃセッションオープンを試みる
 						//session.openForPublish(new Session.OpenRequest(getActivity()).setCallback(statusCallback).setPermissions(PERMISSIONS));
 						Session.OpenRequest openRequest = new OpenRequest(getActivity()).setCallback(statusCallback).setLoginBehavior(SessionLoginBehavior.SSO_WITH_FALLBACK);
 						session.openForRead(openRequest);
