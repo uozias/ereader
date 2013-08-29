@@ -94,6 +94,7 @@ public class ShareDialogFragment extends DialogFragment {
 			}
 			if (session == null) {
 				session = new Session(getActivity());
+				session.addCallback(statusCallback);
 			}
 			Session.setActiveSession(session);
 
@@ -195,8 +196,9 @@ public class ShareDialogFragment extends DialogFragment {
 			if (state == SessionState.CLOSED || state == SessionState.CLOSED_LOGIN_FAILED) {
 				//セッションが閉じてたら新しいセッションを開始
 				session = new Session(getActivity());
-				Session.setActiveSession(session);
-				return false; //新たにログインする時はfalseを返す
+				session.addCallback(statusCallback);
+				Session.setActiveSession(session); //新しくセッションをつくったら、これをやるのがとても大事
+
 
 			}
 			if (state != SessionState.OPENING && state != SessionState.OPENED && state != SessionState.OPENED_TOKEN_UPDATED){
