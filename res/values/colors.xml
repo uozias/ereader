@@ -15,5 +15,7 @@
     <color name="seek_progress">#FFFFFF</color>
     <color name="facebook">#3b5998</color>
     <color name="twitter">#00acee</color>
-    
+    <color name="mixi">#e0c074</color>
+    <color name="line">#4fca16</color>
+
 </resources>

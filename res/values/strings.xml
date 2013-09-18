@@ -28,4 +28,5 @@
     <string name="facebook" translatable="false">Facebook</string>
     <string name="mixi" translatable="false">Mixi</string>
     <string name="twitter" translatable="false">Twitter</string>
+    <string name="line" translatable="false">Line</string>
 </resources>

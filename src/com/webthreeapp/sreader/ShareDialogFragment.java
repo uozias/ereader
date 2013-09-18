@@ -1,5 +1,7 @@
 package com.webthreeapp.sreader;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -42,11 +45,20 @@ public class ShareDialogFragment extends DialogFragment {
 
 	private MySwitch facebookButton = null;
 	private MySwitch twitterButton = null;
+	private MySwitch mixiButton = null;
+	private MySwitch lineButton = null;
 
 	private Button shareButton = null;
 	private TextView sendContentText = null;
 
+
+	//ログイン状態
 	private boolean fbLogin = false;
+	private boolean twitterLogin = false;
+	private boolean lineLogin = false;
+	private boolean mixiLogin = false;
+
+	//通信中フラグ
 	private boolean sendingFbFeed = false;
 
 	private Bundle savedInstanceState = null;
@@ -54,7 +66,7 @@ public class ShareDialogFragment extends DialogFragment {
 	//Facebookのパーミッション
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 
-	private Session.StatusCallback statusCallback = new SessionStatusCallback();
+	private Session.StatusCallback statusCallback = new FBSessionStatusCallback();
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -114,14 +126,17 @@ public class ShareDialogFragment extends DialogFragment {
 
 		//twitterボタン
 		twitterButton = (MySwitch) dialog.findViewById(R.id.twitterButton);
-		twitterButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		twitterButton.setOnCheckedChangeListener(new TWOnCheckedChangeListener());
 
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO 自動生成されたメソッド・スタブ
+		//lineボタン
+		lineButton  = (MySwitch) dialog.findViewById(R.id.lineButton);
+		lineButton.setChecked(false);
+		lineButton.setOnCheckedChangeListener(new LNOnCheckedChangeListener());
 
-			}
-		});
+		//mixiボタン
+		mixiButton  = (MySwitch) dialog.findViewById(R.id.mixiButton);
+		mixiButton.setOnCheckedChangeListener(new MXOnCheckedChangeListener());
+
 
 		//SNSに投稿
 		shareButton.setOnClickListener(new OnClickListener() {
@@ -132,12 +147,27 @@ public class ShareDialogFragment extends DialogFragment {
 				if (fbLogin == true) {
 					sendFBFeed(sendContentText.getText().toString());
 				}
+				if (twitterLogin == true){
 
+				}
+				if (mixiLogin == true){
+
+
+				}
+				if (lineLogin == true){
+					sendLNFeed(sendContentText.getText().toString());
+				}
 			}
 		});
 
 		return dialog;
 	}
+
+	/*
+	 * facebook
+	 *
+	 *
+	 */
 
 	//facebookボタンのクリック時(トグルボタンバージョン)
 
@@ -158,7 +188,7 @@ public class ShareDialogFragment extends DialogFragment {
 
 			if (isChecked) {
 				//チェックされた時 = ログイン
-				checkLogin();
+				FBcheckLogin();
 			} else {
 				Session session = Session.getActiveSession();
 				//チェックが外れた時 = ログアウト
@@ -171,7 +201,7 @@ public class ShareDialogFragment extends DialogFragment {
 	}
 
 	//ログイン処理
-	public boolean checkLogin(){
+	public boolean FBcheckLogin(){
 		Session session = Session.getActiveSession();
 
 
@@ -271,7 +301,7 @@ public class ShareDialogFragment extends DialogFragment {
 		Session session = Session.getActiveSession();
 
 		//ログインチェック
-		if(checkLogin() != true){
+		if(FBcheckLogin() != true){
 			return; //ログインされてない時はまた今度
 		}
 
@@ -290,7 +320,7 @@ public class ShareDialogFragment extends DialogFragment {
 		//投稿リクエスト
 		Request request = Request.newStatusUpdateRequest(session, feedString, new Request.Callback() {
 			public void onCompleted(Response response) {
-				showPublishResult(response.getGraphObject(), response.getError());
+				showFBPublishResult(response.getGraphObject(), response.getError());
 			}
 		});
 
@@ -309,7 +339,7 @@ public class ShareDialogFragment extends DialogFragment {
 	}
 
 	//結果をアラートする関数
-	private void showPublishResult(GraphObject result, FacebookRequestError error) {
+	private void showFBPublishResult(GraphObject result, FacebookRequestError error) {
 
 		if (error == null) {
 			Toast.makeText(getActivity(), "facebook投稿成功", Toast.LENGTH_LONG).show();
@@ -324,7 +354,7 @@ public class ShareDialogFragment extends DialogFragment {
 	}
 
 	//ログイン状態変化のコールバック
-	private class SessionStatusCallback implements Session.StatusCallback {
+	private class FBSessionStatusCallback implements Session.StatusCallback {
 		@Override
 		public void call(Session session, SessionState sessionState, Exception exception) {
 
@@ -366,7 +396,80 @@ public class ShareDialogFragment extends DialogFragment {
 		}
 	}
 
-	//fragmentの各ライフサイクル
+	/*
+	 * twitter
+	 *
+	 *
+	 */
+	private class TWOnCheckedChangeListener implements OnCheckedChangeListener {
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
+
+
+
+	/*
+	 * mixi
+	 *
+	 *
+	 */
+
+	private class MXOnCheckedChangeListener implements OnCheckedChangeListener {
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
+
+	/*
+	 * line
+	 *
+	 *
+	 */
+	private class LNOnCheckedChangeListener implements OnCheckedChangeListener  {
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if(isChecked){
+				lineLogin = true;
+				twitterButton.setChecked(false); //lineと他のを同時にオンにできない
+				facebookButton.setChecked(false);
+				mixiButton.setChecked(false);
+			}
+
+		}
+	}
+
+	//LINE送信 (インテント発行するだけ)
+	private void sendLNFeed(String sendingContent){
+		Intent intent = new Intent();
+		intent.setAction(Intent.ACTION_VIEW);
+		String encodeStr = null;
+		try {
+			encodeStr = URLEncoder.encode(sendingContent,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+
+			e.printStackTrace();
+		}
+		intent.setData(Uri.parse("line://msg/text/" + encodeStr));
+		startActivity(intent);
+
+	}
+
+	/*
+	 *
+	 * ライフサイクル
+	 *
+	 */
+
 	@Override
 	public void onStart() {
 		super.onStart();

@@ -70,7 +70,7 @@ public class MuPDFActivity extends FragmentActivity
 	private ImageButton  mCancelButton;
 	private ImageButton  mOutlineButton;
 	private ViewAnimator mTopBarSwitcher;
-	//private ImageButton  mLinkButton;
+	private ImageButton  mLinkButton;
 	private ImageButton mShareButton; //added by aoyagi
 	private boolean      mTopBarIsSearch;
 	private ImageButton  mSearchBack;
@@ -589,8 +589,6 @@ public class MuPDFActivity extends FragmentActivity
 		});
 
 
-		//disabled by aoyagi
-		/*
 		mLinkButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (mLinkHighlight) {
@@ -605,7 +603,7 @@ public class MuPDFActivity extends FragmentActivity
 				mDocView.setLinksEnabled(mLinkHighlight);
 			}
 		});
-		*/
+
 
 		//added by aoyagi シェア機能
 		mShareButton.setOnClickListener(new ShareOnClickListener());
@@ -877,8 +875,7 @@ public class MuPDFActivity extends FragmentActivity
 		mSearchBack = (ImageButton)mButtonsView.findViewById(R.id.searchBack);
 		mSearchFwd = (ImageButton)mButtonsView.findViewById(R.id.searchForward);
 		mSearchText = (EditText)mButtonsView.findViewById(R.id.searchText);
-		//mLinkButton = (ImageButton)mButtonsView.findViewById(R.id.linkButton);
-		//mLinkButton.setVisibility(View.INVISIBLE); //added by aoyagi;
+		mLinkButton = (ImageButton)mButtonsView.findViewById(R.id.linkButton);
 		mTopBarSwitcher.setVisibility(View.INVISIBLE);
 		mPageNumberView.setVisibility(View.INVISIBLE);
 		mInfoView.setVisibility(View.INVISIBLE);
