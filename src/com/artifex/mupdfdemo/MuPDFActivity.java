@@ -85,7 +85,9 @@ public class MuPDFActivity extends FragmentActivity
 	private AsyncTask<Void,Void,MuPDFAlert> mAlertTask;
 	private AlertDialog mAlertDialog;
 
-	 private boolean isResumed = false;
+	private boolean isResumed = false;
+	private String bookName;
+	private Object pageSaved;
 
 	public void createAlertWaiter() {
 		mAlertsActive = true;
@@ -257,7 +259,8 @@ public class MuPDFActivity extends FragmentActivity
 
 		//new code
 		if (core == null) {
-			core = (MuPDFCore)getLastNonConfigurationInstance();
+			//core = (MuPDFCore)getLastNonConfigurationInstance(); revised by aoyagi
+			core = (MuPDFCore)getLastCustomNonConfigurationInstance();
 
 			if (savedInstanceState != null && savedInstanceState.containsKey("FileName")) {
 				mFileName = savedInstanceState.getString("FileName");
@@ -265,6 +268,7 @@ public class MuPDFActivity extends FragmentActivity
 		}
 		if (core == null) {
 			Intent intent = getIntent();
+			mFileName = intent.getStringExtra("bookName");
 			byte buffer[] = null;
 			if ("com.webthreeapp.book.VIEW".equals(intent.getAction())) {
 				Uri uri = intent.getData();
@@ -330,7 +334,33 @@ public class MuPDFActivity extends FragmentActivity
 		}
 
 		createUI(savedInstanceState);
+
+		//閉じた時のページを表示する added by aoyagi
+		//showSavedPage(bookName);
+
 	}
+
+	//added by aoyagi
+	//保存したページに移動する
+	/*
+	private void showSavedPage(String bookName) {
+		if(bookName != null){
+			//保存された書籍名とページを読み出す
+			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+			String bookNameSaved = sharedPreferences.getString("bookName", null);
+			int pageNumSaved = sharedPreferences.getInt("pageNum", 0);
+
+			//今開いている本と照合する
+			if(bookName.equals(bookNameSaved)){
+				//あってたらそのページに移動する
+				mDocView.setDisplayedViewIndex(pageNumSaved);
+				mDocView.resetupChildren();
+			}
+
+		}
+
+	}
+	*/
 
 	public void requestPassword(final Bundle savedInstanceState) {
 		mPasswordView = new EditText(this);
@@ -660,7 +690,7 @@ public class MuPDFActivity extends FragmentActivity
 	}
 
 	//added by aoyagi
-	//facebookログイン用のオンクリックリスナー
+	//各種サービス連携投稿機能用オンクリックリスナー
 	private class ShareOnClickListener implements View.OnClickListener{
 		@Override
 		public void onClick(View v) {
@@ -685,14 +715,15 @@ public class MuPDFActivity extends FragmentActivity
 	}
 
 	//revised by aoyagi
-	/*
-	public Object onRetainNonConfigurationInstance()
+
+	@Override
+	//public Object onRetainNonConfigurationInstance()
+	public Object onRetainCustomNonConfigurationInstance()
 	{
 		MuPDFCore mycore = core;
 		core = null;
 		return mycore;
 	}
-	*/
 
 	private void toggleReflow() {
 		mReflow = !mReflow;
@@ -943,6 +974,18 @@ public class MuPDFActivity extends FragmentActivity
 		{
 			destroyAlertWaiter();
 			core.stopAlerts();
+
+			//added by aoyagi
+			//書籍名とページを保存
+			/*
+			if(mDocView != null){
+				SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+				sharedPreferences.edit().putString("bookName", bookName).commit();
+				sharedPreferences.edit().putInt("pageNum", mDocView.getDisplayedViewIndex()).commit();
+			}
+			*/
+
+
 		}
 
 		super.onStop();
