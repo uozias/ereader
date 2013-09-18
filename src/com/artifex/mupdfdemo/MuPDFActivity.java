@@ -266,8 +266,9 @@ public class MuPDFActivity extends FragmentActivity
 				mFileName = savedInstanceState.getString("FileName");
 			}
 		}
+		Intent intent = null;
 		if (core == null) {
-			Intent intent = getIntent();
+			intent = getIntent();
 			mFileName = intent.getStringExtra("bookName");
 			byte buffer[] = null;
 			if ("com.webthreeapp.book.VIEW".equals(intent.getAction())) {
@@ -335,32 +336,9 @@ public class MuPDFActivity extends FragmentActivity
 
 		createUI(savedInstanceState);
 
-		//閉じた時のページを表示する added by aoyagi
-		//showSavedPage(bookName);
 
 	}
 
-	//added by aoyagi
-	//保存したページに移動する
-	/*
-	private void showSavedPage(String bookName) {
-		if(bookName != null){
-			//保存された書籍名とページを読み出す
-			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-			String bookNameSaved = sharedPreferences.getString("bookName", null);
-			int pageNumSaved = sharedPreferences.getInt("pageNum", 0);
-
-			//今開いている本と照合する
-			if(bookName.equals(bookNameSaved)){
-				//あってたらそのページに移動する
-				mDocView.setDisplayedViewIndex(pageNumSaved);
-				mDocView.resetupChildren();
-			}
-
-		}
-
-	}
-	*/
 
 	public void requestPassword(final Bundle savedInstanceState) {
 		mPasswordView = new EditText(this);
@@ -696,15 +674,17 @@ public class MuPDFActivity extends FragmentActivity
 		public void onClick(View v) {
 			FragmentManager mFragmentManager = getSupportFragmentManager();
 			ShareDialogFragment mShareDialogFragment = new ShareDialogFragment();
-
 			mShareDialogFragment.show(mFragmentManager, "share_dialog");
-
 		}
 	}
 
 
-
-
+	@Override
+	protected void onNewIntent(Intent intent) {
+	 super.onNewIntent(intent);
+	 	//getIntent()更新
+	 	setIntent(intent);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -714,7 +694,7 @@ public class MuPDFActivity extends FragmentActivity
 		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data); //facebook
 	}
 
-	//revised by aoyagi
+
 
 	@Override
 	//public Object onRetainNonConfigurationInstance()
@@ -974,17 +954,6 @@ public class MuPDFActivity extends FragmentActivity
 		{
 			destroyAlertWaiter();
 			core.stopAlerts();
-
-			//added by aoyagi
-			//書籍名とページを保存
-			/*
-			if(mDocView != null){
-				SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-				sharedPreferences.edit().putString("bookName", bookName).commit();
-				sharedPreferences.edit().putInt("pageNum", mDocView.getDisplayedViewIndex()).commit();
-			}
-			*/
-
 
 		}
 

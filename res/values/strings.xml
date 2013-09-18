@@ -29,4 +29,7 @@
     <string name="mixi" translatable="false">Mixi</string>
     <string name="twitter" translatable="false">Twitter</string>
     <string name="line" translatable="false">Line</string>
+    <string name="twitter_consumer_key">td2AkdgzCiiRkw09ALSSAA</string>
+    <string name="twitter_consumer_secret">4FSFANKII9XsaQiyzVEw766y0efPXxbZXvSclrjE</string>
+    <string name="twitter_callback_url">gabu://twitter</string>
 </resources>

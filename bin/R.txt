@@ -295,6 +295,9 @@ int string strike_out 0x7f08002d
 int string text_not_found 0x7f080026
 int string top_text 0x7f08002e
 int string twitter 0x7f080034
+int string twitter_callback_url 0x7f080038
+int string twitter_consumer_key 0x7f080036
+int string twitter_consumer_secret 0x7f080037
 int string version 0x7f08001a
 int style AppBaseTheme 0x7f090002
 int style AppTheme 0x7f090003

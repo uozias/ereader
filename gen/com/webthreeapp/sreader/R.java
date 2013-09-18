@@ -665,6 +665,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int text_not_found=0x7f080026;
         public static final int top_text=0x7f08002e;
         public static final int twitter=0x7f080034;
+        public static final int twitter_callback_url=0x7f080038;
+        public static final int twitter_consumer_key=0x7f080036;
+        public static final int twitter_consumer_secret=0x7f080037;
         public static final int version=0x7f08001a;
     }
     public static final class style {

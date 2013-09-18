@@ -56,11 +56,22 @@
             android:name="com.artifex.mupdfdemo.MuPDFActivity"
             android:label="@string/app_name"
 			android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask" > <!-- added by aoyagi  -->
             <intent-filter>
                 <action android:name="com.webthreeapp.book.VIEW" />
                 <data android:mimeType="application/pdf" />
             </intent-filter>
+            <intent-filter>
+		        <action android:name="android.intent.action.VIEW" />
+
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+
+		        <data
+		            android:host="twitter"
+		            android:scheme="gabu" />
+		    </intent-filter>
              <!--
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

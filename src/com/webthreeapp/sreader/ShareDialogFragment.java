@@ -6,10 +6,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -43,6 +48,9 @@ public class ShareDialogFragment extends DialogFragment {
 
 	private String TAG = "ShareDialogFragment";
 
+	private Bundle savedInstanceState = null;
+
+	//ボタン
 	private MySwitch facebookButton = null;
 	private MySwitch twitterButton = null;
 	private MySwitch mixiButton = null;
@@ -58,15 +66,19 @@ public class ShareDialogFragment extends DialogFragment {
 	private boolean lineLogin = false;
 	private boolean mixiLogin = false;
 
-	//通信中フラグ
-	private boolean sendingFbFeed = false;
 
-	private Bundle savedInstanceState = null;
+	private boolean sendingFbFeed = false; //通信中フラグ
 
-	//Facebookのパーミッション
+	//Facebook関連
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
-
 	private Session.StatusCallback statusCallback = new FBSessionStatusCallback();
+
+	//Twitter関連
+	 private String mCallbackURL;
+    private Twitter mTwitter;
+    private RequestToken mRequestToken;
+
+
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -98,6 +110,7 @@ public class ShareDialogFragment extends DialogFragment {
 		//facebookButton.setOnDrawerOpenListener(new FBOnDrawerOpenListener()); //slidingDrawerを使ったバージョン
 		//facebookButton.setOnDrawerCloseListener(new FBOnDrawerCloseListener(this));
 
+
 		//facebook session管理
 		Session session = Session.getActiveSession();
 		if (session == null) {
@@ -124,6 +137,7 @@ public class ShareDialogFragment extends DialogFragment {
 			}
 		}
 
+
 		//twitterボタン
 		twitterButton = (MySwitch) dialog.findViewById(R.id.twitterButton);
 		twitterButton.setOnCheckedChangeListener(new TWOnCheckedChangeListener());
@@ -143,19 +157,19 @@ public class ShareDialogFragment extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				String sendingContent = sendContentText.getText().toString();
 				if (fbLogin == true) {
-					sendFBFeed(sendContentText.getText().toString());
+					sendFBFeed(sendingContent);
 				}
 				if (twitterLogin == true){
-
+					sendTWFeed(sendingContent);
 				}
 				if (mixiLogin == true){
 
-
+					sendMXFeed(sendingContent);
 				}
 				if (lineLogin == true){
-					sendLNFeed(sendContentText.getText().toString());
+					sendLNFeed(sendingContent);
 				}
 			}
 		});
@@ -373,7 +387,7 @@ public class ShareDialogFragment extends DialogFragment {
 						//ログインしている時
 						fbLogin = true;
 
-						Toast.makeText(getActivity(), "facebook認証成功", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "Facebook認証成功", Toast.LENGTH_SHORT).show();
 
 						if (!facebookButton.isChecked()) {
 							facebookButton.setChecked(true);//トグルボタンをオンに
@@ -405,13 +419,106 @@ public class ShareDialogFragment extends DialogFragment {
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			// TODO 自動生成されたメソッド・スタブ
+
+			if(isChecked){
+
+				//アクセストークンチェック
+				if (!TwitterUtils.hasAccessToken(getActivity())) {
+					//インスタンスをつくる
+					mCallbackURL = getString(R.string.twitter_callback_url);
+			        mTwitter = TwitterUtils.getTwitterInstance(getActivity());
+
+			        startAuthorize();
+
+				}else{
+					twitterLogin = true;
+				}
+
+
+			}else{
+				//TODO トークン破棄
+			}
 
 		}
 
 	}
 
+	//twitterの認証開始
+	private void startAuthorize() {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                try {
+                    mRequestToken = mTwitter.getOAuthRequestToken(mCallbackURL);
+                    return mRequestToken.getAuthorizationURL();
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
 
+            @Override
+            protected void onPostExecute(String url) {
+                if (url != null) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                } else {
+                    // 失敗。。。
+                }
+            }
+        };
+        task.execute();
+    }
+
+	//受け取る処理
+	private void twAuthCallback(){
+
+		Intent intent =getActivity().getIntent();
+
+		String mCallbackURL = getString(R.string.twitter_callback_url);
+		if (intent == null
+	                || intent.getData() == null
+	                || !intent.getData().toString().startsWith(mCallbackURL)) {
+	            return;
+	        }
+
+		String verifier = intent.getData().getQueryParameter("oauth_verifier");
+
+        AsyncTask<String, Void, AccessToken> task = new AsyncTask<String, Void, AccessToken>() {
+            @Override
+            protected AccessToken doInBackground(String... params) {
+                try {
+                    return mTwitter.getOAuthAccessToken(mRequestToken, params[0]);
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(AccessToken accessToken) {
+                if (accessToken != null) {
+                    // 認証成功！
+                    Toast.makeText(getActivity(), "Twitter認証成功", Toast.LENGTH_SHORT).show();
+                    successOAuth(accessToken);
+                } else {
+
+                }
+            }
+        };
+        task.execute(verifier);
+	}
+
+	//ログイン成功後処理
+	private void successOAuth(AccessToken accessToken) {
+		 TwitterUtils.storeAccessToken(getActivity(), accessToken);
+		 twitterLogin = true;
+	}
+
+	//送信
+	private void sendTWFeed(String sendingContent){
+
+	}
 
 	/*
 	 * mixi
@@ -426,6 +533,11 @@ public class ShareDialogFragment extends DialogFragment {
 			// TODO 自動生成されたメソッド・スタブ
 
 		}
+
+	}
+
+	//送信
+	private void sendMXFeed(String sendingContent){
 
 	}
 
@@ -474,6 +586,11 @@ public class ShareDialogFragment extends DialogFragment {
 	public void onStart() {
 		super.onStart();
 		Session.getActiveSession().addCallback(statusCallback);
+
+		twAuthCallback();
+
+
+
 
 	}
 
