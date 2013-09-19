@@ -78,6 +78,9 @@ public class ShareDialogFragment extends DialogFragment {
     private Twitter mTwitter;
     private RequestToken mRequestToken;
 
+    //
+    private String defaultString;
+    private String mLink = "";
 
 
 	@Override
@@ -99,6 +102,11 @@ public class ShareDialogFragment extends DialogFragment {
 
 		Resources res = getResources();
 		dialog.setTitle(res.getString(R.string.share));
+
+		//デフォルトメッセージ設定
+		mLink = getArguments().getString("playURL");
+		defaultString = getArguments().getString("bookNameJ") + "を" + getArguments().getString("pageNum") + "ページまで読みました！ " + mLink;
+		sendContentText.setText(defaultString);
 
 		/*
 		 * ボタンにイベント設定
@@ -517,7 +525,32 @@ public class ShareDialogFragment extends DialogFragment {
 
 	//送信
 	private void sendTWFeed(String sendingContent){
+		 mTwitter = TwitterUtils.getTwitterInstance(getActivity());
 
+		AsyncTask<String, Void, Boolean> task = new AsyncTask<String, Void, Boolean>() {
+	        @Override
+	        protected Boolean doInBackground(String... params) {
+	            try {
+	                mTwitter.updateStatus(params[0]);
+	                return true;
+	            } catch (TwitterException e) {
+	                e.printStackTrace();
+	                return false;
+	            }
+	        }
+
+	        @Override
+	        protected void onPostExecute(Boolean result) {
+	            if (result) {
+	            	Toast.makeText(getActivity(), "ツイート成功", Toast.LENGTH_LONG).show();
+	            	sendContentText.setText(""); //投稿成功したら空に
+
+	            }else{
+	            	Toast.makeText(getActivity(), "ツイート失敗", Toast.LENGTH_LONG).show();
+	            }
+			}
+		};
+		task.execute(sendingContent);
 	}
 
 	/*
@@ -530,7 +563,12 @@ public class ShareDialogFragment extends DialogFragment {
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			// TODO 自動生成されたメソッド・スタブ
+			if(isChecked){
+
+
+			}else{
+
+			}
 
 		}
 

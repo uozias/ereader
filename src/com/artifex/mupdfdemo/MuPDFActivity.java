@@ -86,8 +86,9 @@ public class MuPDFActivity extends FragmentActivity
 	private AlertDialog mAlertDialog;
 
 	private boolean isResumed = false;
-	private String bookName;
-	private Object pageSaved;
+
+	private String bookNameJ; //本の名前
+	private String playURL;
 
 	public void createAlertWaiter() {
 		mAlertsActive = true;
@@ -270,6 +271,8 @@ public class MuPDFActivity extends FragmentActivity
 		if (core == null) {
 			intent = getIntent();
 			mFileName = intent.getStringExtra("bookName");
+			bookNameJ = intent.getStringExtra("bookNameJ");
+			playURL = intent.getStringExtra("playURL");
 			byte buffer[] = null;
 			if ("com.webthreeapp.book.VIEW".equals(intent.getAction())) {
 				Uri uri = intent.getData();
@@ -674,6 +677,11 @@ public class MuPDFActivity extends FragmentActivity
 		public void onClick(View v) {
 			FragmentManager mFragmentManager = getSupportFragmentManager();
 			ShareDialogFragment mShareDialogFragment = new ShareDialogFragment();
+			Bundle bundle = new Bundle();
+			bundle.putString("bookNameJ", bookNameJ);
+			bundle.putString("pageNum", Integer.toString(mDocView.getDisplayedViewIndex()+1));
+			bundle.putString("playURL", playURL);
+			mShareDialogFragment.setArguments(bundle);
 			mShareDialogFragment.show(mFragmentManager, "share_dialog");
 		}
 	}
