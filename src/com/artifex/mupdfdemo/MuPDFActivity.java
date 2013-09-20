@@ -62,13 +62,13 @@ public class MuPDFActivity extends FragmentActivity
 	private TextView     mPageNumberView;
 	private TextView     mInfoView;
 	private ImageButton  mSearchButton;
-	private ImageButton  mReflowButton;
+	//private ImageButton  mReflowButton;
 	//private ImageButton mSelectButton;
 	private ImageButton mCancelSelectButton;
 	private ImageButton mCopySelectButton;
 	private ImageButton mStrikeOutButton;
 	private ImageButton  mCancelButton;
-	private ImageButton  mOutlineButton;
+	//private ImageButton  mOutlineButton;
 	private ViewAnimator mTopBarSwitcher;
 	private ImageButton  mLinkButton;
 	private ImageButton mShareButton; //added by aoyagi
@@ -450,11 +450,14 @@ public class MuPDFActivity extends FragmentActivity
 		});
 
 		// Activate the reflow button
+		//disabled by aoyagi
+		/*
 		mReflowButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				toggleReflow();
 			}
 		});
+		*/
 
 
 		// Activate the select button
@@ -619,6 +622,8 @@ public class MuPDFActivity extends FragmentActivity
 		//added by aoyagi シェア機能
 		mShareButton.setOnClickListener(new ShareOnClickListener());
 
+		//added by aoyagi シェア機能
+		/*
 		if (core.hasOutline()) {
 			mOutlineButton.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
@@ -633,6 +638,7 @@ public class MuPDFActivity extends FragmentActivity
 		} else {
 			mOutlineButton.setVisibility(View.GONE);
 		}
+		*/
 
 		// Reenstate last state if it was recorded
 		SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
@@ -721,7 +727,7 @@ public class MuPDFActivity extends FragmentActivity
 		core = null;
 		return mycore;
 	}
-
+	/*
 	private void toggleReflow() {
 		mReflow = !mReflow;
 		if (mReflow) {
@@ -733,6 +739,7 @@ public class MuPDFActivity extends FragmentActivity
 		}
 		mDocView.refresh(mReflow);
 	}
+	*/
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -891,14 +898,13 @@ public class MuPDFActivity extends FragmentActivity
 		mPageNumberView = (TextView)mButtonsView.findViewById(R.id.pageNumber);
 		mInfoView = (TextView)mButtonsView.findViewById(R.id.info);
 		mSearchButton = (ImageButton)mButtonsView.findViewById(R.id.searchButton);
-		mReflowButton = (ImageButton)mButtonsView.findViewById(R.id.reflowButton);
+		//mReflowButton = (ImageButton)mButtonsView.findViewById(R.id.reflowButton);
 		//mSelectButton = (ImageButton)mButtonsView.findViewById(R.id.selectButton);
-		//mSelectButton.setVisibility(View.INVISIBLE); //added by aoyagi
 		mCancelSelectButton = (ImageButton)mButtonsView.findViewById(R.id.cancelSelectButton);
 		mCopySelectButton = (ImageButton)mButtonsView.findViewById(R.id.copySelectButton);
 		mStrikeOutButton = (ImageButton)mButtonsView.findViewById(R.id.strikeOutButton);
 		mCancelButton = (ImageButton)mButtonsView.findViewById(R.id.cancel);
-		mOutlineButton = (ImageButton)mButtonsView.findViewById(R.id.outlineButton);
+		//mOutlineButton = (ImageButton)mButtonsView.findViewById(R.id.outlineButton);
 		mTopBarSwitcher = (ViewAnimator)mButtonsView.findViewById(R.id.switcher);
 		mSearchBack = (ImageButton)mButtonsView.findViewById(R.id.searchBack);
 		mSearchFwd = (ImageButton)mButtonsView.findViewById(R.id.searchForward);

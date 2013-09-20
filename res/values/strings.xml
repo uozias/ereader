@@ -16,7 +16,7 @@
     <string name="text_not_found" translatable="false">Text not found</string>
     <string name="searching_" translatable="false">Searching...</string>
     <string name="link_control" translatable="false">Link highlighting and enabling</string>
-    <string name="no_further_occurences_found" translatable="false">No further occurences found</string>
+    <string name="no_further_occurences_found" translatable="false">No further occurrences found</string>
     <string name="select" translatable="false">Select</string>
     <string name="search" translatable="false">検索</string>
     <string name="copy" translatable="false">Copy</string>
@@ -29,14 +29,13 @@
     <string name="mixi" translatable="false">Mixi</string>
     <string name="twitter" translatable="false">Twitter</string>
     <string name="line" translatable="false">Line</string>
-    <string name="twitter_consumer_key">td2AkdgzCiiRkw09ALSSAA</string>
-    <string name="twitter_consumer_secret">4FSFANKII9XsaQiyzVEw766y0efPXxbZXvSclrjE</string>
-    <string name="twitter_callback_url">gabu://twitter</string>
-    <string name="mixi_app_id">40113</string>
-    <string name="mixi_app_id_dev">40110</string>
-    <string name="package_name_mixi">jp.mixi</string>
-    <string name="package_name_line">jp.naver.line.android</string>
-    <string name="mixi_consumer_key"
->45dbdc36bb2ef93d5c6d</string>
-    <string name="mixi_consumer_key_dev">5c9af36436c78200ef1b</string>
+    <string name="twitter_consumer_key" translatable="false">td2AkdgzCiiRkw09ALSSAA</string>
+    <string name="twitter_consumer_secret" translatable="false">4FSFANKII9XsaQiyzVEw766y0efPXxbZXvSclrjE</string>
+    <string name="twitter_callback_url" translatable="false">gabu://twitter</string>
+    <string name="mixi_app_id" translatable="false">40113</string>
+    <string name="mixi_app_id_dev" translatable="false">40110</string>
+    <string name="package_name_mixi" translatable="false">jp.mixi</string>
+    <string name="package_name_line" translatable="false">jp.naver.line.android</string>
+    <string name="mixi_consumer_key" translatable="false">45dbdc36bb2ef93d5c6d</string>
+    <string name="mixi_consumer_key_dev" translatable="false">5c9af36436c78200ef1b</string>
 </resources>

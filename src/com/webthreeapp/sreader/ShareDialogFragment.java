@@ -104,6 +104,7 @@ public class ShareDialogFragment extends DialogFragment {
     private String defaultString;
     private String mLink = "";
 
+    Resources res;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -112,6 +113,8 @@ public class ShareDialogFragment extends DialogFragment {
 
 		Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.share_dialog);
+
+		res = getResources();
 
 		//投稿スペースなどを画面サイズに対応した大きさにする
 		Display display = getActivity().getWindowManager().getDefaultDisplay();
@@ -122,7 +125,7 @@ public class ShareDialogFragment extends DialogFragment {
 		shareButton = (Button) dialog.findViewById(R.id.button_share);
 		shareButton.setWidth(display.getWidth() - 40);
 
-		Resources res = getResources();
+
 		dialog.setTitle(res.getString(R.string.share));
 
 		//デフォルトメッセージ設定
@@ -193,13 +196,8 @@ public class ShareDialogFragment extends DialogFragment {
 
 		//mixiセッション開始
 		if(checkInstall(res.getString(R.string.package_name_mixi))){
-			mxInstalled = true;
-			Config config = new Config();
-	        config.clientId = "mixiapp_" + res.getString(R.string.mixi_app_id_dev);
-	        mContainer = MixiContainerFactory.getContainer(config);
-	        mContainer.init(getActivity());
+			mxMakeContanior();
 
-	        mixiLogin = mContainer.isAuthorized();
 	        if(mixiLogin){
 	        	mixiButton.setChecked(true);
 	        }
@@ -610,12 +608,22 @@ public class ShareDialogFragment extends DialogFragment {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if(isChecked ){
 				//認証
+				if(mxInstalled == false &&  checkInstall(res.getString(R.string.package_name_mixi)) == true){
+					mxInstalled = checkInstall(res.getString(R.string.package_name_mixi));
+					mxMakeContanior();
+				}
 				if(mxInstalled){
 					mxIsLogingIn = true;
 					mContainer.authorize(getActivity(), new String[] {"mixi_apps2","w_voice"}, AUTHORIZE_REQUEST_CODE, new mxLogInCallback());
 				}else{
+
 					mixiButton.setChecked(false);
 					Toast.makeText(getActivity(), "Mixiアプリがインストールされていません。", Toast.LENGTH_LONG).show();
+					//playstoreへ
+					Uri uri2 = Uri.parse("market://details?id=" + res.getString(R.string.package_name_mixi));
+					Intent it = new Intent(Intent.ACTION_VIEW, uri2);
+					startActivity(it);
+
 				}
 
 			}else{
@@ -738,6 +746,17 @@ public class ShareDialogFragment extends DialogFragment {
 
 	}
 
+	private void mxMakeContanior(){
+		mxInstalled = true;
+		Config config = new Config();
+        config.clientId = "mixiapp_" + res.getString(R.string.mixi_app_id);
+        mContainer = MixiContainerFactory.getContainer(config);
+        mContainer.init(getActivity());
+
+        mixiLogin = mContainer.isAuthorized();
+
+	}
+
 	/*
 	 * line
 	 *
@@ -748,6 +767,7 @@ public class ShareDialogFragment extends DialogFragment {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if(isChecked){
+				lnInstalled =    checkInstall(res.getString(R.string.package_name_line));
 				if(lnInstalled){
 					lineLogin = true;
 					twitterButton.setChecked(false); //lineと他のを同時にオンにできない
@@ -756,6 +776,10 @@ public class ShareDialogFragment extends DialogFragment {
 				}else{
 					lineButton.setChecked(false);
 					Toast.makeText(getActivity(), "LINEアプリがインストールされていません。", Toast.LENGTH_LONG).show();
+					//playstoreへ
+					Uri uri2 = Uri.parse("market://details?id=" + res.getString(R.string.package_name_line));
+					Intent it = new Intent(Intent.ACTION_VIEW, uri2);
+					startActivity(it);
 
 				}
 			}
@@ -824,7 +848,10 @@ public class ShareDialogFragment extends DialogFragment {
 
     @Override
     public void onDestroy() {
-        mContainer.close(getActivity()); //mixi
+    	if(mContainer != null){
+    		mContainer.close(getActivity()); //mixi
+    	}
+
         super.onDestroy();
     }
 
