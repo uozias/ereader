@@ -18,18 +18,22 @@ public class MuPDFPageAdapter extends BaseAdapter {
 		mCore = core;
 	}
 
+	@Override
 	public int getCount() {
 		return mCore.countPages();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return null;
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return 0;
 	}
 
+	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		final MuPDFPageView pageView;
 		if (convertView == null) {

@@ -35,6 +35,7 @@ class PassClickResultText extends PassClickResult {
 		text = _text;
 	}
 
+	@Override
 	public void acceptVisitor(PassClickResultVisitor visitor) {
 		visitor.visitText(this);
 	}
@@ -50,6 +51,7 @@ class PassClickResultChoice extends PassClickResult {
 		selected = _selected;
 	}
 
+	@Override
 	public void acceptVisitor(PassClickResultVisitor visitor) {
 		visitor.visitChoice(this);
 	}
@@ -77,11 +79,13 @@ public class MuPDFPageView extends PageView implements MuPDFView {
 		mEditText = (EditText)inflater.inflate(R.layout.textentry, null);
 		mTextEntryBuilder.setView(mEditText);
 		mTextEntryBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 			}
 		});
 		mTextEntryBuilder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mSetWidgetText = new AsyncTask<String,Void,Boolean> () {
 					@Override
@@ -105,12 +109,13 @@ public class MuPDFPageView extends PageView implements MuPDFView {
 		mChoiceEntryBuilder.setTitle("MuPDF: choose value");
 	}
 
+	@Override
 	public LinkInfo hitLink(float x, float y) {
 		// Since link highlighting was implemented, the super class
 		// PageView has had sufficient information to be able to
 		// perform this method directly. Making that change would
 		// make MuPDFCore.hitLinkPage superfluous.
-		float scale = mSourceScale*(float)getWidth()/(float)mSize.x;
+		float scale = mSourceScale*getWidth()/mSize.x;
 		float docRelX = (x - getLeft())/scale;
 		float docRelY = (y - getTop())/scale;
 
@@ -129,6 +134,7 @@ public class MuPDFPageView extends PageView implements MuPDFView {
 
 	private void invokeChoiceDialog(final String [] options) {
 		mChoiceEntryBuilder.setItems(options, new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mSetWidgetChoice = new AsyncTask<String,Void,Void>() {
 					@Override
@@ -151,12 +157,14 @@ public class MuPDFPageView extends PageView implements MuPDFView {
 		dialog.show();
 	}
 
+	@Override
 	public void setChangeReporter(Runnable reporter) {
 		changeReporter = reporter;
 	}
 
+	@Override
 	public boolean passClickEvent(float x, float y) {
-		float scale = mSourceScale*(float)getWidth()/(float)mSize.x;
+		float scale = mSourceScale*getWidth()/mSize.x;
 		final float docRelX = (x - getLeft())/scale;
 		final float docRelY = (y - getTop())/scale;
 		boolean hitWidget = false;
@@ -246,6 +254,7 @@ public class MuPDFPageView extends PageView implements MuPDFView {
 		super.setPage(page, size);
 	}
 
+	@Override
 	public void setScale(float scale) {
 		// This type of view scales automatically to fit the size
 		// determined by the parent view groups during layout

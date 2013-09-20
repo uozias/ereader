@@ -4,11 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jp.mixi.android.sdk.CallbackListener;
 import jp.mixi.android.sdk.Config;
 import jp.mixi.android.sdk.ErrorInfo;
+import jp.mixi.android.sdk.HttpMethod;
 import jp.mixi.android.sdk.MixiContainer;
 import jp.mixi.android.sdk.MixiContainerFactory;
 import twitter4j.Twitter;
@@ -691,9 +694,43 @@ public class ShareDialogFragment extends DialogFragment {
 	//ログアウトコールバック
 
 
+
+
 	//送信
 	private void sendMXFeed(String sendingContent){
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("status", sendingContent);
+		mContainer.send("/voice/statuses/update", HttpMethod.POST, params, new mxSendCallback());
 
+	}
+
+	//送信後コールバック
+	public class mxSendCallback implements CallbackListener{
+
+		@Override
+		public void onComplete(Bundle values) {
+
+        	Toast.makeText(getActivity(), "Mixi投稿成功", Toast.LENGTH_LONG).show();
+        	sendContentText.setText(""); //投稿成功したら空に
+		}
+
+		@Override
+		public void onCancel() {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+		@Override
+		public void onFatal(ErrorInfo e) {
+			// TODO 自動生成されたメソッド・スタブ
+			Toast.makeText(getActivity(), "Mixi投稿失敗", Toast.LENGTH_LONG).show();
+		}
+
+		@Override
+		public void onError(ErrorInfo e) {
+			// TODO 自動生成されたメソッド・スタブ
+			Toast.makeText(getActivity(), "Mixi投稿失敗", Toast.LENGTH_LONG).show();
+		}
 
 	}
 

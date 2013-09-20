@@ -47,6 +47,7 @@ public class MuPDFReaderView extends ReaderView {
 			tapPageMargin = dm.widthPixels/5;
 	}
 
+	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
 		LinkInfo link = null;
 
@@ -91,6 +92,7 @@ public class MuPDFReaderView extends ReaderView {
 		return super.onSingleTapUp(e);
 	}
 
+	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
 			float distanceY) {
 		if (!mSelecting) {
@@ -115,6 +117,7 @@ public class MuPDFReaderView extends ReaderView {
 			return true;
 	}
 
+	@Override
 	public boolean onScaleBegin(ScaleGestureDetector d) {
 		// Disabled showing the buttons until next touch.
 		// Not sure why this is needed, but without it
@@ -123,6 +126,7 @@ public class MuPDFReaderView extends ReaderView {
 		return super.onScaleBegin(d);
 	}
 
+	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
 			tapDisabled = false;
@@ -130,6 +134,7 @@ public class MuPDFReaderView extends ReaderView {
 		return super.onTouchEvent(event);
 	}
 
+	@Override
 	protected void onChildSetup(int i, View v) {
 		if (SearchTaskResult.get() != null
 				&& SearchTaskResult.get().pageNumber == i)
@@ -140,6 +145,7 @@ public class MuPDFReaderView extends ReaderView {
 		((MuPDFView) v).setLinkHighlighting(mLinksEnabled);
 
 		((MuPDFView) v).setChangeReporter(new Runnable() {
+			@Override
 			public void run() {
 				applyToChildren(new ReaderView.ViewMapper() {
 					@Override
@@ -151,6 +157,7 @@ public class MuPDFReaderView extends ReaderView {
 		});
 	}
 
+	@Override
 	protected void onMoveToChild(int i) {
 		if (SearchTaskResult.get() != null
 				&& SearchTaskResult.get().pageNumber != i) {
@@ -159,12 +166,14 @@ public class MuPDFReaderView extends ReaderView {
 		}
 	}
 
+	@Override
 	protected void onSettle(View v) {
 		// When the layout has settled ask the page to render
 		// in HQ
 		((MuPDFView) v).addHq(false);
 	}
 
+	@Override
 	protected void onUnsettle(View v) {
 		// When something changes making the previous settled view
 		// no longer appropriate, tell the page to remove HQ

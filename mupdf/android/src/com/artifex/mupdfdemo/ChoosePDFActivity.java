@@ -44,8 +44,9 @@ public class ChoosePDFActivity extends ListActivity {
 			builder.setTitle(R.string.no_media_warning);
 			builder.setMessage(R.string.no_media_hint);
 			AlertDialog alert = builder.create();
-			alert.setButton(AlertDialog.BUTTON_POSITIVE,"Dismiss",
+			alert.setButton(DialogInterface.BUTTON_POSITIVE,"Dismiss",
 					new OnClickListener() {
+						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							finish();
 						}
@@ -64,6 +65,7 @@ public class ChoosePDFActivity extends ListActivity {
 		// ...that is updated dynamically when files are scanned
 		mHandler = new Handler();
 		mUpdateFiles = new Runnable() {
+			@Override
 			public void run() {
 				Resources res = getResources();
 				String appName = res.getString(R.string.app_name);
@@ -75,6 +77,7 @@ public class ChoosePDFActivity extends ListActivity {
 
 				mDirs = mDirectory.listFiles(new FileFilter() {
 
+					@Override
 					public boolean accept(File file) {
 						return file.isDirectory();
 					}
@@ -84,6 +87,7 @@ public class ChoosePDFActivity extends ListActivity {
 
 				mFiles = mDirectory.listFiles(new FileFilter() {
 
+					@Override
 					public boolean accept(File file) {
 						if (file.isDirectory())
 							return false;
@@ -101,12 +105,14 @@ public class ChoosePDFActivity extends ListActivity {
 					mFiles = new File[0];
 
 				Arrays.sort(mFiles, new Comparator<File>() {
+					@Override
 					public int compare(File arg0, File arg1) {
 						return arg0.getName().compareToIgnoreCase(arg1.getName());
 					}
 				});
 
 				Arrays.sort(mDirs, new Comparator<File>() {
+					@Override
 					public int compare(File arg0, File arg1) {
 						return arg0.getName().compareToIgnoreCase(arg1.getName());
 					}
@@ -129,6 +135,7 @@ public class ChoosePDFActivity extends ListActivity {
 
 		// ...and observe the directory and scan files upon changes.
 		FileObserver observer = new FileObserver(mDirectory.getPath(), FileObserver.CREATE | FileObserver.DELETE) {
+			@Override
 			public void onEvent(int event, String path) {
 				mHandler.post(mUpdateFiles);
 			}

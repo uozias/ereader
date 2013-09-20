@@ -61,6 +61,7 @@ public abstract class SearchTask {
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		progressDialog.setTitle(mContext.getString(R.string.searching_));
 		progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
 			public void onCancel(DialogInterface dialog) {
 				stop();
 			}
@@ -92,7 +93,7 @@ public abstract class SearchTask {
 				} else {
 					mAlertBuilder.setTitle(SearchTaskResult.get() == null ? R.string.text_not_found : R.string.no_further_occurences_found);
 					AlertDialog alert = mAlertBuilder.create();
-					alert.setButton(AlertDialog.BUTTON_POSITIVE, "Dismiss",
+					alert.setButton(DialogInterface.BUTTON_POSITIVE, "Dismiss",
 							(DialogInterface.OnClickListener)null);
 					alert.show();
 				}
@@ -112,6 +113,7 @@ public abstract class SearchTask {
 			protected void onPreExecute() {
 				super.onPreExecute();
 				mHandler.postDelayed(new Runnable() {
+					@Override
 					public void run() {
 						if (!progressDialog.isCancelled())
 						{

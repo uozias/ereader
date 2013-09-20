@@ -12,6 +12,7 @@ public class LinkInfoRemote extends LinkInfo {
 		newWindow = n;
 	}
 
+	@Override
 	public void acceptVisitor(LinkInfoVisitor visitor) {
 		visitor.visitRemote(this);
 	}

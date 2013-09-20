@@ -16,18 +16,22 @@ public class MuPDFReflowAdapter extends BaseAdapter {
 		mCore = core;
 	}
 
+	@Override
 	public int getCount() {
 		return mCore.countPages();
 	}
 
+	@Override
 	public Object getItem(int arg0) {
 		return null;
 	}
 
+	@Override
 	public long getItemId(int arg0) {
 		return 0;
 	}
 
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final MuPDFReflowView reflowView;
 		if (convertView == null) {

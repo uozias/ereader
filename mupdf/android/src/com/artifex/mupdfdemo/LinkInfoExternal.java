@@ -8,6 +8,7 @@ public class LinkInfoExternal extends LinkInfo {
 		url = u;
 	}
 
+	@Override
 	public void acceptVisitor(LinkInfoVisitor visitor) {
 		visitor.visitExternal(this);
 	}

@@ -30,6 +30,7 @@ public class MuPDFReflowView extends WebView implements MuPDFView {
 			public void reportContentHeight(String value) {
 				mContentHeight = (int)Float.parseFloat(value);
 				mHandler.post(new Runnable() {
+					@Override
 					public void run() {
 						requestLayout();
 					}
@@ -50,6 +51,7 @@ public class MuPDFReflowView extends WebView implements MuPDFView {
 		loadUrl("javascript:elem=document.getElementById('content');window.HTMLOUT.reportContentHeight("+mParentSize.x+"*elem.offsetHeight/elem.offsetWidth)");
 	}
 
+	@Override
 	public void setPage(int page, PointF size) {
 		mPage = page;
 		if (mLoadHTML != null) {
@@ -69,57 +71,73 @@ public class MuPDFReflowView extends WebView implements MuPDFView {
 		mLoadHTML.execute();
 	}
 
+	@Override
 	public int getPage() {
 		return mPage;
 	}
 
+	@Override
 	public void setScale(float scale) {
 		loadUrl("javascript:document.getElementById('content').style.zoom=\""+(int)(scale*100)+"%\"");
 		requestHeight();
 	}
 
+	@Override
 	public void blank(int page) {
 	}
 
+	@Override
 	public boolean passClickEvent(float x, float y) {
 		return false;
 	}
 
+	@Override
 	public LinkInfo hitLink(float x, float y) {
 		return null;
 	}
 
+	@Override
 	public void selectText(float x0, float y0, float x1, float y1) {
 	}
 
+	@Override
 	public void deselectText() {
 	}
 
+	@Override
 	public boolean copySelection() {
 		return false;
 	}
 
+	@Override
 	public void strikeOutSelection() {
 	}
 
+	@Override
 	public void setSearchBoxes(RectF[] searchBoxes) {
 	}
 
+	@Override
 	public void setLinkHighlighting(boolean f) {
 	}
 
+	@Override
 	public void setChangeReporter(Runnable reporter) {
 	}
 
+	@Override
 	public void update() {
 	}
 
+	@Override
 	public void addHq(boolean update) {
 	}
 
+	@Override
 	public void removeHq() {
 	}
 
+	@Override
 	public void releaseResources() {
 		if (mLoadHTML != null) {
 			mLoadHTML.cancel(true);
