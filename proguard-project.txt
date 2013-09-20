@@ -18,3 +18,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keep class jp.mixi.android.sdk.MixiDialog$JsHandler {
+  public void post(java.lang.String, java.lang.String);
+}
+-keep class jp.mixi.android.IRemoteAuthenticator
+-keep public class * extends android.app.Activity {
+  public void *(android.view.View);
+}

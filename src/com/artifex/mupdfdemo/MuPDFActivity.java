@@ -426,7 +426,7 @@ public class MuPDFActivity extends FragmentActivity
 		mPageSliderRes = ((10 + smax - 1)/smax) * 2;
 
 		// Set the file-name text
-		mFilenameView.setText(mFileName);
+		mFilenameView.setText(bookNameJ);
 
 		// Activate the seekbar
 		mPageSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -700,6 +700,15 @@ public class MuPDFActivity extends FragmentActivity
 			mDocView.setDisplayedViewIndex(resultCode);
 		super.onActivityResult(requestCode, resultCode, data);
 		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data); //facebook
+
+		//mixi
+		FragmentManager mFragmentManager = getSupportFragmentManager();
+		ShareDialogFragment mShareDialogFragment =(ShareDialogFragment) mFragmentManager.findFragmentByTag("share_dialog");
+		if(mShareDialogFragment != null){
+			if(mShareDialogFragment.mContainer != null){
+				mShareDialogFragment.mContainer.authorizeCallback(requestCode, resultCode, data);
+			}
+		}
 	}
 
 

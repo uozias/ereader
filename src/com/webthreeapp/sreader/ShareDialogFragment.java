@@ -6,12 +6,20 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import jp.mixi.android.sdk.CallbackListener;
+import jp.mixi.android.sdk.Config;
+import jp.mixi.android.sdk.ErrorInfo;
+import jp.mixi.android.sdk.MixiContainer;
+import jp.mixi.android.sdk.MixiContainerFactory;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -38,6 +46,8 @@ import com.facebook.Session.OpenRequest;
 import com.facebook.SessionLoginBehavior;
 import com.facebook.SessionState;
 import com.facebook.model.GraphObject;
+
+
 
 /*
  * 各種snsに投稿するためのカスタムダイアログ
@@ -78,7 +88,16 @@ public class ShareDialogFragment extends DialogFragment {
     private Twitter mTwitter;
     private RequestToken mRequestToken;
 
-    //
+    //mixi関連
+    public MixiContainer mContainer = null;;
+    private static int AUTHORIZE_REQUEST_CODE = 394;
+    public boolean mxIsLogingIn = false;
+    public boolean mxInstalled = false;
+
+    //line関連
+    public boolean lnInstalled = false;
+
+    //メッセージ
     private String defaultString;
     private String mLink = "";
 
@@ -146,6 +165,9 @@ public class ShareDialogFragment extends DialogFragment {
 		}
 
 
+
+
+
 		//twitterボタン
 		twitterButton = (MySwitch) dialog.findViewById(R.id.twitterButton);
 		twitterButton.setOnCheckedChangeListener(new TWOnCheckedChangeListener());
@@ -155,10 +177,30 @@ public class ShareDialogFragment extends DialogFragment {
 		lineButton.setChecked(false);
 		lineButton.setOnCheckedChangeListener(new LNOnCheckedChangeListener());
 
+
+		//LINEインストールチェック
+		if(checkInstall(res.getString(R.string.package_name_line))){
+			lnInstalled = true;
+		}
+
+
 		//mixiボタン
 		mixiButton  = (MySwitch) dialog.findViewById(R.id.mixiButton);
 		mixiButton.setOnCheckedChangeListener(new MXOnCheckedChangeListener());
 
+		//mixiセッション開始
+		if(checkInstall(res.getString(R.string.package_name_mixi))){
+			mxInstalled = true;
+			Config config = new Config();
+	        config.clientId = "mixiapp_" + res.getString(R.string.mixi_app_id_dev);
+	        mContainer = MixiContainerFactory.getContainer(config);
+	        mContainer.init(getActivity());
+
+	        mixiLogin = mContainer.isAuthorized();
+	        if(mixiLogin){
+	        	mixiButton.setChecked(true);
+	        }
+		}
 
 		//SNSに投稿
 		shareButton.setOnClickListener(new OnClickListener() {
@@ -172,7 +214,7 @@ public class ShareDialogFragment extends DialogFragment {
 				if (twitterLogin == true){
 					sendTWFeed(sendingContent);
 				}
-				if (mixiLogin == true){
+				if (mixiLogin){
 
 					sendMXFeed(sendingContent);
 				}
@@ -563,19 +605,95 @@ public class ShareDialogFragment extends DialogFragment {
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			if(isChecked){
-
+			if(isChecked ){
+				//認証
+				if(mxInstalled){
+					mxIsLogingIn = true;
+					mContainer.authorize(getActivity(), new String[] {"mixi_apps2","w_voice"}, AUTHORIZE_REQUEST_CODE, new mxLogInCallback());
+				}else{
+					((MySwitch) buttonView).setChecked(false);
+					Toast.makeText(getActivity(), "Mixiアプリがインストールされていません。", Toast.LENGTH_LONG).show();
+				}
 
 			}else{
 
+				//ログアウト
+				if(mxInstalled){
+					mContainer.logout(getActivity(), AUTHORIZE_REQUEST_CODE, new CallbackListener() {
+
+						@Override
+						public void onFatal(ErrorInfo e) {
+							// TODO 自動生成されたメソッド・スタブ
+
+						}
+
+						@Override
+						public void onError(ErrorInfo e) {
+							// TODO 自動生成されたメソッド・スタブ
+
+						}
+
+						@Override
+						public void onComplete(Bundle values) {
+							// TODO 自動生成されたメソッド・スタブ
+							mxIsLogingIn = false;
+							mixiLogin = false;
+						}
+
+						@Override
+						public void onCancel() {
+							// TODO 自動生成されたメソッド・スタブ
+
+						}
+					});
+				}
 			}
 
 		}
 
 	}
 
+	//ログインコールバック
+	public class mxLogInCallback implements CallbackListener{
+        @Override
+        public void onComplete(Bundle values) {
+            // 正常時の処理
+        	Toast.makeText(getActivity(), "Mixi認証成功", Toast.LENGTH_LONG).show();
+        	mxIsLogingIn = false;
+        	mixiLogin = true;
+
+        }
+
+        @Override
+        public void onError(ErrorInfo e) {
+            // エラー時の処理
+        	e.getMessage();
+        	mixiButton.setChecked(false);
+        	mxIsLogingIn = false;
+        }
+
+        @Override
+        public void onCancel() {
+            // ユーザキャンセル時の処理
+        	mixiButton.setChecked(false);
+        	mxIsLogingIn = false;
+        }
+
+        @Override
+        public void onFatal(ErrorInfo e) {
+            // 異常終了時の処理
+        	mixiButton.setChecked(false);
+        	mxIsLogingIn = false;
+        }
+
+	}
+
+	//ログアウトコールバック
+
+
 	//送信
 	private void sendMXFeed(String sendingContent){
+
 
 	}
 
@@ -589,10 +707,15 @@ public class ShareDialogFragment extends DialogFragment {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if(isChecked){
-				lineLogin = true;
-				twitterButton.setChecked(false); //lineと他のを同時にオンにできない
-				facebookButton.setChecked(false);
-				mixiButton.setChecked(false);
+				if(lnInstalled){
+					lineLogin = true;
+					twitterButton.setChecked(false); //lineと他のを同時にオンにできない
+					facebookButton.setChecked(false);
+					mixiButton.setChecked(false);
+				}else{
+					((MySwitch)buttonView).setChecked(false);
+					Toast.makeText(getActivity(), "LINEアプリがインストールされていません。", Toast.LENGTH_LONG).show();
+				}
 			}
 
 		}
@@ -657,6 +780,12 @@ public class ShareDialogFragment extends DialogFragment {
 
 	}
 
+    @Override
+    public void onDestroy() {
+        mContainer.close(getActivity()); //mixi
+        super.onDestroy();
+    }
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -668,7 +797,20 @@ public class ShareDialogFragment extends DialogFragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data);
+		Session.getActiveSession().onActivityResult(getActivity(), requestCode, resultCode, data); //facebook
+
+	}
+
+	//アプリのインストールチェック
+	public boolean checkInstall(String appId){
+		try {
+		    PackageManager pm = getActivity().getPackageManager();
+		    ApplicationInfo appInfo = pm.getApplicationInfo(
+		        appId, PackageManager.GET_META_DATA);
+		} catch(NameNotFoundException e) {
+		    return false;
+		}
+		return true;
 	}
 
 }
