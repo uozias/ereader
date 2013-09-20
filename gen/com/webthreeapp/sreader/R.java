@@ -469,7 +469,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int com_facebook_list_section_header_background=0x7f020011;
         public static final int com_facebook_loginbutton_silver=0x7f020012;
         public static final int com_facebook_logo=0x7f020013;
-        public static final int com_facebook_picker_default_separator_color=0x7f020046;
+        public static final int com_facebook_picker_default_separator_color=0x7f020048;
         public static final int com_facebook_picker_item_background=0x7f020014;
         public static final int com_facebook_picker_list_focused=0x7f020015;
         public static final int com_facebook_picker_list_longpressed=0x7f020016;
@@ -514,12 +514,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sfb_background_copy=0x7f02003d;
         public static final int sgroove_copy=0x7f02003e;
         public static final int sleft_background_copy=0x7f02003f;
-        public static final int smask_background_copy=0x7f020040;
-        public static final int sright_background_copy=0x7f020041;
-        public static final int stoggle_copy1=0x7f020042;
-        public static final int stw_background_copy=0x7f020043;
-        public static final int switch_track_green=0x7f020044;
-        public static final int tiled_background=0x7f020045;
+        public static final int sln_background_copy=0x7f020040;
+        public static final int smask_background_copy=0x7f020041;
+        public static final int smx_background_copy=0x7f020042;
+        public static final int sright_background_copy=0x7f020043;
+        public static final int stoggle_copy1=0x7f020044;
+        public static final int stw_background_copy=0x7f020045;
+        public static final int switch_track_green=0x7f020046;
+        public static final int tiled_background=0x7f020047;
     }
     public static final class id {
         public static final int adList=0x7f08000c;

@@ -614,7 +614,7 @@ public class ShareDialogFragment extends DialogFragment {
 					mxIsLogingIn = true;
 					mContainer.authorize(getActivity(), new String[] {"mixi_apps2","w_voice"}, AUTHORIZE_REQUEST_CODE, new mxLogInCallback());
 				}else{
-					((MySwitch) buttonView).setChecked(false);
+					mixiButton.setChecked(false);
 					Toast.makeText(getActivity(), "Mixiアプリがインストールされていません。", Toast.LENGTH_LONG).show();
 				}
 
@@ -622,33 +622,7 @@ public class ShareDialogFragment extends DialogFragment {
 
 				//ログアウト
 				if(mxInstalled){
-					mContainer.logout(getActivity(), AUTHORIZE_REQUEST_CODE, new CallbackListener() {
-
-						@Override
-						public void onFatal(ErrorInfo e) {
-							// TODO 自動生成されたメソッド・スタブ
-
-						}
-
-						@Override
-						public void onError(ErrorInfo e) {
-							// TODO 自動生成されたメソッド・スタブ
-
-						}
-
-						@Override
-						public void onComplete(Bundle values) {
-							// TODO 自動生成されたメソッド・スタブ
-							mxIsLogingIn = false;
-							mixiLogin = false;
-						}
-
-						@Override
-						public void onCancel() {
-							// TODO 自動生成されたメソッド・スタブ
-
-						}
-					});
+					mContainer.logout(getActivity(), AUTHORIZE_REQUEST_CODE, new mxLogOutCallback());
 				}
 			}
 
@@ -687,12 +661,42 @@ public class ShareDialogFragment extends DialogFragment {
             // 異常終了時の処理
         	mixiButton.setChecked(false);
         	mxIsLogingIn = false;
+        	if(e.getErrorCode() == 5){
+        		//エラーコード5 = 再ログイン必要なら
+        		mContainer.logout(getActivity(), AUTHORIZE_REQUEST_CODE, new mxLogOutCallback()); //ログアウト
+        	}
         }
 
 	}
 
 	//ログアウトコールバック
+	public class mxLogOutCallback implements CallbackListener {
 
+		@Override
+		public void onComplete(Bundle values) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+		@Override
+		public void onCancel() {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+		@Override
+		public void onFatal(ErrorInfo e) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+		@Override
+		public void onError(ErrorInfo e) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
 
 
 
@@ -750,8 +754,9 @@ public class ShareDialogFragment extends DialogFragment {
 					facebookButton.setChecked(false);
 					mixiButton.setChecked(false);
 				}else{
-					((MySwitch)buttonView).setChecked(false);
+					lineButton.setChecked(false);
 					Toast.makeText(getActivity(), "LINEアプリがインストールされていません。", Toast.LENGTH_LONG).show();
+
 				}
 			}
 
