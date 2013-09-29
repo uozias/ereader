@@ -72,6 +72,7 @@ public class MuPDFActivity extends FragmentActivity
 	private ViewAnimator mTopBarSwitcher;
 	private ImageButton  mLinkButton;
 	private ImageButton mShareButton; //added by aoyagi
+	private ImageButton directionButton; //added by aoyagi
 	private boolean      mTopBarIsSearch;
 	private ImageButton  mSearchBack;
 	private ImageButton  mSearchFwd;
@@ -640,6 +641,9 @@ public class MuPDFActivity extends FragmentActivity
 		}
 		*/
 
+		//ページ送り方向変更ボタン
+		directionButton.setOnClickListener(new DirectionOnClickListener());
+
 		// Reenstate last state if it was recorded
 		SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
 		mDocView.setDisplayedViewIndex(prefs.getInt("page"+mFileName, 0));
@@ -692,6 +696,21 @@ public class MuPDFActivity extends FragmentActivity
 		}
 	}
 
+	//ページ送り方向変更ボタン
+	private class DirectionOnClickListener implements View.OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			if(mDocView.getPageFeedDirection() == "right"){
+				mDocView.setPageFeedDirection("left");
+
+
+			}else if(mDocView.getPageFeedDirection() == "left"){
+				mDocView.setPageFeedDirection("right");
+			}
+		}
+
+	}
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -915,7 +934,9 @@ public class MuPDFActivity extends FragmentActivity
 		mInfoView.setVisibility(View.INVISIBLE);
 		mPageSlider.setVisibility(View.INVISIBLE);
 
+		//added by aoyagi
 		mShareButton = (ImageButton)mButtonsView.findViewById(R.id.shareButton);
+		directionButton = (ImageButton)mButtonsView.findViewById(R.id.directionButton);
 	}
 
 	void showKeyboard() {

@@ -28,6 +28,17 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
+			<!--  TODO タップするごとにアイコンを変える -->
+            <ImageButton
+                android:id="@+id/directionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/shareButton"
+                android:background="@drawable/button"
+                android:contentDescription="@string/share"
+                android:src="@android:drawable/ic_menu_revert" />
+
             <ImageButton
                 android:id="@+id/shareButton"
                 android:layout_width="wrap_content"
