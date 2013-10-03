@@ -15,8 +15,7 @@ public class MuPDFReaderView extends ReaderView {
 	private boolean mSelecting = false;
 	private boolean tapDisabled = false;
 	private int tapPageMargin;
-	private String pageFeedDirection = "right"; //added by aoyagi
-	//right:default direction left:reverse directio
+
 
 	protected void onTapMainDocArea() {}
 	protected void onDocMotion() {}
@@ -78,24 +77,7 @@ public class MuPDFReaderView extends ReaderView {
 						// Clicked on a remote (GoToR) link
 					}
 				});
-			} else {
-				if(pageFeedDirection == "left"){
-					//左が前(ディフォルトと逆)
-					if (e.getX() < tapPageMargin) {
-						super.smartMoveForwards();
-					} else if (e.getX() > super.getWidth() - tapPageMargin) {
-						super.smartMoveForwards();
-						super.smartMoveBackwards();
-					} else if (e.getY() < tapPageMargin) {
-						super.smartMoveForwards();
-					} else if (e.getY() > super.getHeight() - tapPageMargin) {
-						super.smartMoveBackwards();
-					} else {
-						onTapMainDocArea();
-					}
-				}else if(pageFeedDirection == "right"){
-					//右が前(ディフォルト)
-					if (e.getX() < tapPageMargin) {
+			} else  if (e.getX() < tapPageMargin) {
 						super.smartMoveBackwards();
 					} else if (e.getX() > super.getWidth() - tapPageMargin) {
 						super.smartMoveForwards();
@@ -106,8 +88,7 @@ public class MuPDFReaderView extends ReaderView {
 					} else {
 						onTapMainDocArea();
 					}
-				}
-			}
+
 		}
 		return super.onSingleTapUp(e);
 	}
@@ -151,27 +132,7 @@ public class MuPDFReaderView extends ReaderView {
 		return super.onTouchEvent(event);
 	}
 
-	//added by aoyagi ページ送り方向のセッター
-	public boolean setPageFeedDirection(String direction){
-		if(direction == "right"){
-			this.pageFeedDirection = "right";
-			return true;
 
-		}else if(direction == "left"){
-			this.pageFeedDirection = "left";
-			return true;
-
-		}else{
-			return false;
-		}
-	}
-
-	//ページ送り方向のゲッター
-	public String getPageFeedDirection(){
-
-			return this.pageFeedDirection;
-
-	}
 
 	protected void onChildSetup(int i, View v) {
 		if (SearchTaskResult.get() != null

@@ -701,12 +701,14 @@ public class MuPDFActivity extends FragmentActivity
 
 		@Override
 		public void onClick(View v) {
-			if(mDocView.getPageFeedDirection() == "right"){
-				mDocView.setPageFeedDirection("left");
+			if(((MuPDFPageAdapter) mDocView.getAdapter()).getPageFeedDirection().equals("right")){
+				//左にする
+				mDocView.setAdapter(new MuPDFPageAdapter(v.getContext(), core, "left"));
 
+			}else{
+				//右にする
+				mDocView.setAdapter(new MuPDFPageAdapter(v.getContext(), core, "right"));
 
-			}else if(mDocView.getPageFeedDirection() == "left"){
-				mDocView.setPageFeedDirection("right");
 			}
 		}
 
