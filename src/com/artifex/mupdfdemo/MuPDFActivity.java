@@ -91,6 +91,8 @@ public class MuPDFActivity extends FragmentActivity
 	private String bookNameJ; //本の名前
 	private String playURL;
 
+	private Resources res;
+
 	public void createAlertWaiter() {
 		mAlertsActive = true;
 		// All mupdf library calls are performed on asynchronous tasks to avoid stalling
@@ -255,7 +257,7 @@ public class MuPDFActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 
 
-
+		res = getResources();
 
 		mAlertBuilder = new AlertDialog.Builder(this);
 
@@ -607,11 +609,13 @@ public class MuPDFActivity extends FragmentActivity
 		mLinkButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (mLinkHighlight) {
-					mLinkButton.setColorFilter(Color.argb(0xFF, 255, 255, 255));
+					//mLinkButton.setColorFilter(Color.argb(0xFF, 255, 255, 255));
+					mLinkButton.setColorFilter(Color.parseColor(res.getString(R.color.button_other))); //added by aoyagi
 					mLinkHighlight = false;
 				} else {
 					// LINK_COLOR tint
-					mLinkButton.setColorFilter(Color.argb(0xFF, 172, 114, 37));
+					//mLinkButton.setColorFilter(Color.argb(0xFF, 172, 114, 37));
+					mLinkButton.setColorFilter(Color.parseColor(res.getString(R.color.button_pressed))); //added by aoyagi
 					mLinkHighlight = true;
 				}
 				// Inform pages of the change.
@@ -704,10 +708,12 @@ public class MuPDFActivity extends FragmentActivity
 			if(((MuPDFPageAdapter) mDocView.getAdapter()).getPageFeedDirection().equals("right")){
 				//左にする
 				mDocView.setAdapter(new MuPDFPageAdapter(v.getContext(), core, "left"));
+				((ImageButton)v).setImageResource(R.drawable.ic_left); //アイコン変える
 
 			}else{
 				//右にする
 				mDocView.setAdapter(new MuPDFPageAdapter(v.getContext(), core, "right"));
+				((ImageButton)v).setImageResource(R.drawable.ic_right); //アイコン変える
 
 			}
 		}
