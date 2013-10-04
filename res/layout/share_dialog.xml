@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mySwitch="http://schemas.android.com/apk/res-auto"
     android:id="@+id/wrapperShareDialog"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="20dp"
@@ -19,172 +19,79 @@
         android:id="@+id/button_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/share" />
+        android:text="@string/share"
+        android:background="@drawable/new_button"/>
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <LinearLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/facebookLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                <LinearLayout
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/facebook"
-                    android:textColor="@color/facebook" />
+                    android:gravity="center" >
 
-                <com.webthreeapp.sreader.MySwitch
-                    android:id="@+id/facebookButton"
-                    style="@style/mySwitchStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="12dp"
+                    <ToggleButton
+                        android:id="@+id/facebookButton"
+                        style="@style/mySwitchStyle"
+                        android:textOff="@string/facebook"
+                        android:textOn="@string/facebook"
+                        android:background="@drawable/toggle_fb"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_weight="1"
-                    android:gravity="center"
-                    mySwitch:backgroundMask="@drawable/smask_background_copy"
-                    mySwitch:leftBackground="@drawable/sleft_background_copy"
-                    mySwitch:pushStyle="true"
-                    mySwitch:rightBackground="@drawable/sfb_background_copy"
-                    mySwitch:textOff="off"
-                    mySwitch:textOn="on"
-                    mySwitch:textOnThumb="false"
-                    mySwitch:thumb="@drawable/stoggle_copy1"
-                    mySwitch:thumbExtraMovement="25dp"
-                    mySwitch:track="@drawable/sgroove_copy"
-                    mySwitch:trackTextPadding="2dp" />
-            </LinearLayout>
+                    android:gravity="center" >
 
-            <LinearLayout
+                    <ToggleButton
+                        android:id="@+id/twitterButton"
+                        style="@style/mySwitchStyle"
+                        android:textOff="@string/twitter"
+                        android:textOn="@string/twitter"
+                         android:background="@drawable/toggle_tw"
+                        />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/twitterLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                <LinearLayout
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/twitter"
-                    android:textColor="@color/twitter" />
+                    android:gravity="center" >
 
-                <com.webthreeapp.sreader.MySwitch
-                    android:id="@+id/twitterButton"
-                    style="@style/mySwitchStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="12dp"
+                    <ToggleButton
+                        android:id="@+id/mixiButton"
+                        style="@style/mySwitchStyle"
+                        android:textOff="@string/mixi"
+                        android:textOn="@string/mixi"
+                         android:background="@drawable/toggle_mx" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_weight="1"
-                    android:gravity="center"
-                    mySwitch:backgroundMask="@drawable/smask_background_copy"
-                    mySwitch:leftBackground="@drawable/sleft_background_copy"
-                    mySwitch:pushStyle="true"
-                    mySwitch:rightBackground="@drawable/stw_background_copy"
-                    mySwitch:textOff="off"
-                    mySwitch:textOn="on"
-                    mySwitch:textOnThumb="false"
-                    mySwitch:thumb="@drawable/stoggle_copy1"
-                    mySwitch:thumbExtraMovement="25dp"
-                    mySwitch:track="@drawable/sgroove_copy"
-                    mySwitch:trackTextPadding="2dp" />
-            </LinearLayout>
+                    android:gravity="center" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/mixiLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/mixi"
-                    android:textColor="@color/mixi" />
-
-                <com.webthreeapp.sreader.MySwitch
-                    android:id="@+id/mixiButton"
-                    style="@style/mySwitchStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    mySwitch:backgroundMask="@drawable/smask_background_copy"
-                    mySwitch:leftBackground="@drawable/sleft_background_copy"
-                    mySwitch:pushStyle="true"
-                    mySwitch:rightBackground="@drawable/smx_background_copy"
-                    mySwitch:textOff="off"
-                    mySwitch:textOn="on"
-                    mySwitch:textOnThumb="false"
-                    mySwitch:thumb="@drawable/stoggle_copy1"
-                    mySwitch:thumbExtraMovement="25dp"
-                    mySwitch:track="@drawable/sgroove_copy"
-                    mySwitch:trackTextPadding="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/lineLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/line"
-                    android:textColor="@color/line" />
-
-                <com.webthreeapp.sreader.MySwitch
-                    android:id="@+id/lineButton"
-                    style="@style/mySwitchStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    mySwitch:backgroundMask="@drawable/smask_background_copy"
-                    mySwitch:leftBackground="@drawable/sleft_background_copy"
-                    mySwitch:pushStyle="true"
-                    mySwitch:rightBackground="@drawable/sln_background_copy"
-                    mySwitch:textOff="off"
-                    mySwitch:textOn="on"
-                    mySwitch:textOnThumb="false"
-                    mySwitch:thumb="@drawable/stoggle_copy1"
-                    mySwitch:thumbExtraMovement="25dp"
-                    mySwitch:track="@drawable/sgroove_copy"
-                    mySwitch:trackTextPadding="2dp" />
-            </LinearLayout>
-        </LinearLayout>
+                    <ToggleButton
+                        android:id="@+id/lineButton"
+                        style="@style/mySwitchStyle"
+                        android:textOff="@string/line"
+                        android:textOn="@string/line"
+                         android:background="@drawable/toggle_ln"
+                        />
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
     </ScrollView>
+
 </LinearLayout>

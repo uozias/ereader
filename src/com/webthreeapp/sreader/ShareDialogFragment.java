@@ -37,6 +37,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookOperationCanceledException;
@@ -64,10 +65,10 @@ public class ShareDialogFragment extends DialogFragment {
 	private Bundle savedInstanceState = null;
 
 	//ボタン
-	private MySwitch facebookButton = null;
-	private MySwitch twitterButton = null;
-	private MySwitch mixiButton = null;
-	private MySwitch lineButton = null;
+	private ToggleButton facebookButton = null;
+	private ToggleButton twitterButton = null;
+	private ToggleButton mixiButton = null;
+	private ToggleButton lineButton = null;
 
 	private Button shareButton = null;
 	private TextView sendContentText = null;
@@ -138,7 +139,7 @@ public class ShareDialogFragment extends DialogFragment {
 		 */
 
 		//facebookボタン
-		facebookButton = (MySwitch) dialog.findViewById(R.id.facebookButton);
+		facebookButton = (ToggleButton) dialog.findViewById(R.id.facebookButton);
 		facebookButton.setOnCheckedChangeListener(new FBOnCheckedChangeListener(this, savedInstanceState)); //トグルボタンバージョン
 		//facebookButton.setOnDrawerOpenListener(new FBOnDrawerOpenListener()); //slidingDrawerを使ったバージョン
 		//facebookButton.setOnDrawerCloseListener(new FBOnDrawerCloseListener(this));
@@ -175,11 +176,11 @@ public class ShareDialogFragment extends DialogFragment {
 
 
 		//twitterボタン
-		twitterButton = (MySwitch) dialog.findViewById(R.id.twitterButton);
+		twitterButton = (ToggleButton) dialog.findViewById(R.id.twitterButton);
 		twitterButton.setOnCheckedChangeListener(new TWOnCheckedChangeListener());
 
 		//lineボタン
-		lineButton  = (MySwitch) dialog.findViewById(R.id.lineButton);
+		lineButton  = (ToggleButton) dialog.findViewById(R.id.lineButton);
 		lineButton.setChecked(false);
 		lineButton.setOnCheckedChangeListener(new LNOnCheckedChangeListener());
 
@@ -191,7 +192,7 @@ public class ShareDialogFragment extends DialogFragment {
 
 
 		//mixiボタン
-		mixiButton  = (MySwitch) dialog.findViewById(R.id.mixiButton);
+		mixiButton  = (ToggleButton) dialog.findViewById(R.id.mixiButton);
 		mixiButton.setOnCheckedChangeListener(new MXOnCheckedChangeListener());
 
 		//mixiセッション開始

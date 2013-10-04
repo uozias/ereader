@@ -20,7 +20,7 @@ public class AdSpaceView extends ImageView {
 
 		//大きさ決める 高さを60dpで固定 トップマージン5p
 		//親がLinearLayoutじゃない時は無視されてしまう
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 50);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 60);
 		params.setMargins(0, 10, 0, 0);
 		this.setLayoutParams(params);
 

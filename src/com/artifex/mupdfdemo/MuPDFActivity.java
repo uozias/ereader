@@ -668,7 +668,7 @@ public class MuPDFActivity extends FragmentActivity
 		mAdSpaceViewForReader.setId(R.id.ad_space_view_in_reader);//idセット
 
 		//レイアウトパラメータのセット
-		RelativeLayout.LayoutParams paramsForAdSpaceView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 100);
+		RelativeLayout.LayoutParams paramsForAdSpaceView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 60);
 		paramsForAdSpaceView.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		layout.addView(mAdSpaceViewForReader,paramsForAdSpaceView);
 

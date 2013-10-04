@@ -403,10 +403,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**   <color name="button_normal">#00000000</color> 
          */
         public static final int button_normal=0x7f05000c;
-        public static final int button_other=0x7f05000e;
+        public static final int button_normal2=0x7f05000d;
+        public static final int button_other=0x7f05000f;
         /**   <color name="button_pressed">#FF2572AC</color> 
          */
-        public static final int button_pressed=0x7f05000d;
+        public static final int button_pressed=0x7f05000e;
         public static final int canvas=0x7f050008;
         public static final int com_facebook_blue=0x7f050003;
         public static final int com_facebook_loginview_text_color=0x7f050007;
@@ -416,21 +417,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int com_facebook_usersettingsfragment_connected_text_color=0x7f050004;
         public static final int com_facebook_usersettingsfragment_not_connected_text_color=0x7f050006;
         public static final int dialog_text=0x7f050000;
-        public static final int facebook=0x7f050016;
-        public static final int line=0x7f050019;
-        public static final int mixi=0x7f050018;
+        public static final int facebook=0x7f050017;
+        public static final int line=0x7f05001a;
+        public static final int mixi=0x7f050019;
         public static final int page_indicator=0x7f05000a;
-        public static final int seek_progress=0x7f050015;
-        public static final int seek_thumb=0x7f050014;
-        public static final int text_border_focused=0x7f050013;
-        public static final int text_border_normal=0x7f050011;
-        public static final int text_border_pressed=0x7f050012;
-        public static final int text_normal=0x7f05000f;
-        public static final int text_pressed=0x7f050010;
+        public static final int seek_progress=0x7f050016;
+        public static final int seek_thumb=0x7f050015;
+        public static final int text_border_focused=0x7f050014;
+        public static final int text_border_normal=0x7f050012;
+        public static final int text_border_pressed=0x7f050013;
+        public static final int text_normal=0x7f050010;
+        public static final int text_pressed=0x7f050011;
         /**   <color name="toolbar">#C0000000</color> 
          */
         public static final int toolbar=0x7f050009;
-        public static final int twitter=0x7f050017;
+        public static final int twitter=0x7f050018;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -476,7 +477,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int com_facebook_list_section_header_background=0x7f020011;
         public static final int com_facebook_loginbutton_silver=0x7f020012;
         public static final int com_facebook_logo=0x7f020013;
-        public static final int com_facebook_picker_default_separator_color=0x7f02004e;
+        public static final int com_facebook_picker_default_separator_color=0x7f020053;
         public static final int com_facebook_picker_item_background=0x7f020014;
         public static final int com_facebook_picker_list_focused=0x7f020015;
         public static final int com_facebook_picker_list_longpressed=0x7f020016;
@@ -520,21 +521,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int mixi_connect_button_01=0x7f02003c;
         public static final int mixi_connect_button_02=0x7f02003d;
         public static final int mixi_login_button_01=0x7f02003e;
-        public static final int page_num=0x7f02003f;
-        public static final int search=0x7f020040;
-        public static final int seek_progress=0x7f020041;
-        public static final int seek_thumb=0x7f020042;
-        public static final int sfb_background_copy=0x7f020043;
-        public static final int sgroove_copy=0x7f020044;
-        public static final int sleft_background_copy=0x7f020045;
-        public static final int sln_background_copy=0x7f020046;
-        public static final int smask_background_copy=0x7f020047;
-        public static final int smx_background_copy=0x7f020048;
-        public static final int sright_background_copy=0x7f020049;
-        public static final int stoggle_copy1=0x7f02004a;
-        public static final int stw_background_copy=0x7f02004b;
-        public static final int switch_track_green=0x7f02004c;
-        public static final int tiled_background=0x7f02004d;
+        public static final int new_button=0x7f02003f;
+        public static final int page_num=0x7f020040;
+        public static final int search=0x7f020041;
+        public static final int seek_progress=0x7f020042;
+        public static final int seek_thumb=0x7f020043;
+        public static final int sfb_background_copy=0x7f020044;
+        public static final int sgroove_copy=0x7f020045;
+        public static final int sleft_background_copy=0x7f020046;
+        public static final int sln_background_copy=0x7f020047;
+        public static final int smask_background_copy=0x7f020048;
+        public static final int smx_background_copy=0x7f020049;
+        public static final int sright_background_copy=0x7f02004a;
+        public static final int stoggle_copy1=0x7f02004b;
+        public static final int stw_background_copy=0x7f02004c;
+        public static final int switch_track_green=0x7f02004d;
+        public static final int tiled_background=0x7f02004e;
+        public static final int toggle_fb=0x7f02004f;
+        public static final int toggle_ln=0x7f020050;
+        public static final int toggle_mx=0x7f020051;
+        public static final int toggle_tw=0x7f020052;
     }
     public static final class id {
         public static final int adList=0x7f08000c;
@@ -566,19 +572,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int copySelectButton=0x7f08001c;
         public static final int directionButton=0x7f080011;
         public static final int docNameText=0x7f08000f;
-        public static final int facebookButton=0x7f080041;
-        public static final int facebookLabel=0x7f080040;
+        public static final int facebookButton=0x7f080040;
         public static final int horizontal=0x7f080003;
         public static final int icon=0x7f08003b;
         public static final int info=0x7f080020;
         public static final int italic=0x7f080006;
         public static final int large=0x7f080002;
-        public static final int lineButton=0x7f080047;
-        public static final int lineLabel=0x7f080046;
+        public static final int lineButton=0x7f080043;
         public static final int linkButton=0x7f080012;
         public static final int lowerButtons=0x7f08001d;
-        public static final int mixiButton=0x7f080045;
-        public static final int mixiLabel=0x7f080044;
+        public static final int mixiButton=0x7f080042;
         public static final int monospace=0x7f080009;
         public static final int name=0x7f08003c;
         public static final int normal=0x7f080001;
@@ -604,8 +607,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int topBar=0x7f08000e;
         public static final int topBar2=0x7f080014;
         public static final int topBar3=0x7f080019;
-        public static final int twitterButton=0x7f080043;
-        public static final int twitterLabel=0x7f080042;
+        public static final int twitterButton=0x7f080041;
         public static final int vertical=0x7f080004;
         public static final int webview=0x7f080023;
         public static final int wrapperShareDialog=0x7f08003d;
@@ -721,12 +723,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070004;
-        public static final int SwitchText=0x7f070005;
         public static final int Theme_MixiDialogTheme=0x7f070000;
         public static final int com_facebook_loginview_default_style=0x7f070001;
         public static final int com_facebook_loginview_silver_style=0x7f070002;
-        public static final int mySwitchStyle=0x7f070006;
-        public static final int mySwitchTextAppearance=0x7f070007;
+        public static final int mySwitchStyle=0x7f070005;
     }
     public static final class styleable {
         /** Attributes that can be used with a MySwitch.
